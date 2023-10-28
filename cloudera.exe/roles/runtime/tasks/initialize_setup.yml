@@ -1,0 +1,49 @@
+---
+
+# Copyright 2023 Cloudera, Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: Include provider-specific tasks to initialize Runtime setup
+  ansible.builtin.include_tasks: "initialize_setup_{{ run__infra_type }}.yml"
+  tags:
+    - ml
+    - dw
+    - opdb
+    - dh
+
+- name: Initialize CDP Runtime setup
+  ansible.builtin.include_tasks: "initialize_base.yml"
+  tags:
+    - ml
+    - dw
+    - opdb
+    - dh
+    - df
+    - de
+
+- name: Prepare for CDP DW experiences
+  when: run__include_dw
+  block:
+    - name: Confirm public subnet count CDP DW public load balancer
+      when: not run__dw_private_load_balancer
+      ansible.builtin.assert:
+        that:
+          - run__public_subnet_ids | length == 3
+        fail_msg: "Must have exactly 3 public subnets when deploying CDP Data Warehouse with a public load balancer"
+        quiet: yes
+      tags:
+        - ml
+        - dw
+        - opdb
+        - dh

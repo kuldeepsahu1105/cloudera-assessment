@@ -1,0 +1,1622 @@
+[0m[1mmodule.ex01_minimal_inputs.data.cdp_environments_aws_credential_prerequisites.cdp_prereqs: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.datalake_admin_s3_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.bucket_access_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.log_data_access_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.datalake_restore_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.xaccount_account_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.ranger_audit_s3_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.datalake_backup_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.bucket_access_policy_doc: Read complete after 0s [id=https://raw.githubusercontent.com/hortonworks/cloudbreak/CB-2.73.0/cloud-aws-common/src/main/resources/definitions/cdp/aws-cdp-bucket-access-policy.json][0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.ranger_audit_s3_policy_doc: Read complete after 0s [id=https://raw.githubusercontent.com/hortonworks/cloudbreak/CB-2.73.0/cloud-aws-common/src/main/resources/definitions/cdp/aws-cdp-ranger-audit-s3-policy.json][0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.datalake_admin_s3_policy_doc: Read complete after 0s [id=https://raw.githubusercontent.com/hortonworks/cloudbreak/CB-2.73.0/cloud-aws-common/src/main/resources/definitions/cdp/aws-cdp-datalake-admin-s3-policy.json][0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.datalake_restore_policy_doc: Read complete after 0s [id=https://raw.githubusercontent.com/hortonworks/cloudbreak/CB-2.73.0/cloud-aws-cloudformation/src/main/resources/definitions/aws-datalake-restore-policy.json][0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.xaccount_account_policy_doc: Read complete after 0s [id=https://raw.githubusercontent.com/hortonworks/cloudbreak/CB-2.73.0/cloud-aws-common/src/main/resources/definitions/aws-cb-policy.json][0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.log_data_access_policy_doc: Read complete after 0s [id=https://raw.githubusercontent.com/hortonworks/cloudbreak/CB-2.73.0/cloud-aws-common/src/main/resources/definitions/cdp/aws-cdp-log-policy.json][0m
+[0m[1mmodule.ex01_minimal_inputs.data.http.datalake_backup_policy_doc: Read complete after 0s [id=https://raw.githubusercontent.com/hortonworks/cloudbreak/CB-2.73.0/cloud-aws-cloudformation/src/main/resources/definitions/aws-datalake-backup-policy.json][0m
+[0m[1mmodule.ex01_minimal_inputs.data.cdp_environments_aws_credential_prerequisites.cdp_prereqs: Read complete after 1s[0m
+[0m[1mmodule.ex01_minimal_inputs.data.aws_iam_policy_document.cdp_idbroker_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.aws_iam_policy_document.cdp_idbroker_role_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.aws_iam_policy_document.cdp_xaccount_role_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.aws_iam_policy_document.cdp_log_role_policy_doc: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.aws_iam_policy_document.cdp_idbroker_policy_doc: Read complete after 0s [id=899402387][0m
+[0m[1mmodule.ex01_minimal_inputs.data.aws_iam_policy_document.cdp_idbroker_role_policy_doc: Read complete after 0s [id=1903849331][0m
+[0m[1mmodule.ex01_minimal_inputs.data.aws_iam_policy_document.cdp_xaccount_role_policy_doc: Read complete after 0s [id=1834557335][0m
+[0m[1mmodule.ex01_minimal_inputs.data.aws_iam_policy_document.cdp_log_role_policy_doc: Read complete after 0s [id=1903849331][0m
+[0m[1mmodule.ex01_minimal_inputs.data.aws_caller_identity.current: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.module.aws_cdp_vpc[0].data.aws_availability_zones.zones_in_region: Reading...[0m[0m
+[0m[1mmodule.ex01_minimal_inputs.data.aws_caller_identity.current: Read complete after 0s [id=240356362593][0m
+[0m[1mmodule.ex01_minimal_inputs.module.aws_cdp_vpc[0].data.aws_availability_zones.zones_in_region: Read complete after 0s [id=us-east-1][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+ [36m<=[0m read (data resources)[0m
+
+Terraform will perform the following actions:
+
+[1m  # module.ex01_minimal_inputs.data.aws_iam_policy_document.cdp_datalake_admin_role_policy_doc[0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "aws_iam_policy_document" "cdp_datalake_admin_role_policy_doc" {
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m json    = (known after apply)
+      [32m+[0m[0m version = "2012-10-17"
+
+      [32m+[0m[0m statement {
+          [32m+[0m[0m actions = [
+              [32m+[0m[0m "sts:AssumeRole",
+            ]
+          [32m+[0m[0m effect  = "Allow"
+
+          [32m+[0m[0m principals {
+              [32m+[0m[0m identifiers = [
+                  [32m+[0m[0m "arn:aws:iam::240356362593:role/kuldeep_cdpdemo-idbroker-role",
+                ]
+              [32m+[0m[0m type        = "AWS"
+            }
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.data.aws_iam_policy_document.cdp_ranger_audit_role_policy_doc[0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "aws_iam_policy_document" "cdp_ranger_audit_role_policy_doc" {
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m json    = (known after apply)
+      [32m+[0m[0m version = "2012-10-17"
+
+      [32m+[0m[0m statement {
+          [32m+[0m[0m actions = [
+              [32m+[0m[0m "sts:AssumeRole",
+            ]
+          [32m+[0m[0m effect  = "Allow"
+
+          [32m+[0m[0m principals {
+              [32m+[0m[0m identifiers = [
+                  [32m+[0m[0m "arn:aws:iam::240356362593:role/kuldeep_cdpdemo-idbroker-role",
+                ]
+              [32m+[0m[0m type        = "AWS"
+            }
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.data.aws_vpc.cdp_vpc[0m will be read during apply
+  # (config refers to values not yet known)
+[0m [36m<=[0m[0m data "aws_vpc" "cdp_vpc" {
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m cidr_block                           = (known after apply)
+      [32m+[0m[0m cidr_block_associations              = (known after apply)
+      [32m+[0m[0m default                              = (known after apply)
+      [32m+[0m[0m dhcp_options_id                      = (known after apply)
+      [32m+[0m[0m enable_dns_hostnames                 = (known after apply)
+      [32m+[0m[0m enable_dns_support                   = (known after apply)
+      [32m+[0m[0m enable_network_address_usage_metrics = (known after apply)
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_tenancy                     = (known after apply)
+      [32m+[0m[0m ipv6_association_id                  = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                      = (known after apply)
+      [32m+[0m[0m main_route_table_id                  = (known after apply)
+      [32m+[0m[0m owner_id                             = (known after apply)
+      [32m+[0m[0m state                                = (known after apply)
+      [32m+[0m[0m tags                                 = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_datalake_admin_role_instance_profile[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_instance_profile" "cdp_datalake_admin_role_instance_profile" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m create_date = (known after apply)
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-dladmin-role"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m role        = "kuldeep_cdpdemo-dladmin-role"
+      [32m+[0m[0m tags_all    = (known after apply)
+      [32m+[0m[0m unique_id   = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_idbroker_role_instance_profile[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_instance_profile" "cdp_idbroker_role_instance_profile" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m create_date = (known after apply)
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-idbroker-role"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m role        = "kuldeep_cdpdemo-idbroker-role"
+      [32m+[0m[0m tags_all    = (known after apply)
+      [32m+[0m[0m unique_id   = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_log_role_instance_profile[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_instance_profile" "cdp_log_role_instance_profile" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m create_date = (known after apply)
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-logs-role"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m role        = "kuldeep_cdpdemo-logs-role"
+      [32m+[0m[0m tags_all    = (known after apply)
+      [32m+[0m[0m unique_id   = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_ranger_audit_role_instance_profile[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_instance_profile" "cdp_ranger_audit_role_instance_profile" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m create_date = (known after apply)
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-audit-role"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m role        = "kuldeep_cdpdemo-audit-role"
+      [32m+[0m[0m tags_all    = (known after apply)
+      [32m+[0m[0m unique_id   = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_policy.cdp_bucket_data_access_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_policy" "cdp_bucket_data_access_policy" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m description = "CDP Bucket S3 Access Policy for kuldeep_cdpdemo."
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-storage-policy"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m policy      = (known after apply)
+      [32m+[0m[0m policy_id   = (known after apply)
+      [32m+[0m[0m tags        = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-storage-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all    = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-storage-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_admin_s3_data_access_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_policy" "cdp_datalake_admin_s3_data_access_policy" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m description = "CDP Datalake Admin S3 Access Policy for kuldeep_cdpdemo."
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-dladmin-policy"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m policy      = (known after apply)
+      [32m+[0m[0m policy_id   = (known after apply)
+      [32m+[0m[0m tags        = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-dladmin-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all    = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-dladmin-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_backup_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_policy" "cdp_datalake_backup_policy" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m description = "CDP Datalake Backup Policy for kuldeep_cdpdemo."
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-datalake-backup-policy"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m policy      = (known after apply)
+      [32m+[0m[0m policy_id   = (known after apply)
+      [32m+[0m[0m tags        = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-datalake-backup-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all    = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-datalake-backup-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_restore_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_policy" "cdp_datalake_restore_policy" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m description = "CDP Datalake Restore Policy for kuldeep_cdpdemo."
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-datalake-restore-policy"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m policy      = (known after apply)
+      [32m+[0m[0m policy_id   = (known after apply)
+      [32m+[0m[0m tags        = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-datalake-restore-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all    = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-datalake-restore-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_policy.cdp_idbroker_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_policy" "cdp_idbroker_policy" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m description = "CDP IDBroker Assume Role Policy for kuldeep_cdpdemo."
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-idbroker-policy"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m policy      = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = "sts:AssumeRole"
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = "*"
+                      [32m+[0m[0m Sid      = "VisualEditor0"
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m policy_id   = (known after apply)
+      [32m+[0m[0m tags        = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-idbroker-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all    = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-idbroker-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_policy.cdp_log_data_access_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_policy" "cdp_log_data_access_policy" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m description = "CDP Log Location Access Policy for kuldeep_cdpdemo."
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-logs-policy"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m policy      = (known after apply)
+      [32m+[0m[0m policy_id   = (known after apply)
+      [32m+[0m[0m tags        = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-logs-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all    = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-logs-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_policy.cdp_ranger_audit_s3_data_access_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_policy" "cdp_ranger_audit_s3_data_access_policy" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m description = "CDP Ranger Audit S3 Access Policy for kuldeep_cdpdemo."
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-audit-policy"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m policy      = (known after apply)
+      [32m+[0m[0m policy_id   = (known after apply)
+      [32m+[0m[0m tags        = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-audit-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all    = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-audit-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_policy.cdp_xaccount_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_policy" "cdp_xaccount_policy" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m description = "CDP Cross-Account Policy for kuldeep_cdpdemo."
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "kuldeep_cdpdemo-xaccount-policy"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m policy      = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "cloudformation:*",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "CloudFormationFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "cloudwatch:PutMetricAlarm",
+                          [32m+[0m[0m "cloudwatch:DeleteAlarms",
+                          [32m+[0m[0m "cloudwatch:DescribeAlarms",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "CloudWatchMetric"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "dynamodb:*",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "DynamoDBFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "logs:CreateLogGroup",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "LogsFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "logs:CreateLogStream",
+                          [32m+[0m[0m "logs:DescribeLogStreams",
+                          [32m+[0m[0m "logs:PutLogEvents",
+                          [32m+[0m[0m "logs:PutRetentionPolicy",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "arn:aws:logs:*:*:log-group:/aws/eks/*:*",
+                        ]
+                      [32m+[0m[0m Sid      = "LogsLimited"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "eks:*",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "EnterpriseKubernetesServiceFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "pi:*",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "arn:aws:pi:*:*:metrics/rds/*",
+                        ]
+                      [32m+[0m[0m Sid      = "PerformanceInsightsLimited"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "elasticloadbalancing:*",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "ElasticLoadBalancingFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "rds:*",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "RelationalDatabaseServiceFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "route53:AssociateVPCWithHostedZone",
+                          [32m+[0m[0m "route53:ChangeResourceRecordSets",
+                          [32m+[0m[0m "route53:CreateHostedZone",
+                          [32m+[0m[0m "route53:GetChange",
+                          [32m+[0m[0m "route53:ListHostedZones",
+                          [32m+[0m[0m "route53:ListHostedZonesByName",
+                          [32m+[0m[0m "route53:ListResourceRecordSets",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "DomainNameServicesFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "acm:AddTagsToCertificate",
+                          [32m+[0m[0m "acm:DeleteCertificate",
+                          [32m+[0m[0m "acm:DescribeCertificate",
+                          [32m+[0m[0m "acm:GetCertificate",
+                          [32m+[0m[0m "acm:ListCertificates",
+                          [32m+[0m[0m "acm:RenewCertificate",
+                          [32m+[0m[0m "acm:RequestCertificate",
+                          [32m+[0m[0m "acm:ListTagsForCertificate",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "CertificateManagerFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "s3:AbortMultipartUpload",
+                          [32m+[0m[0m "s3:CreateBucket",
+                          [32m+[0m[0m "s3:DeleteObject",
+                          [32m+[0m[0m "s3:GetObject",
+                          [32m+[0m[0m "s3:ListBucket",
+                          [32m+[0m[0m "s3:GetBucketLocation",
+                          [32m+[0m[0m "s3:PutObject",
+                          [32m+[0m[0m "s3:DeleteBucket",
+                          [32m+[0m[0m "s3:PutBucketPublicAccessBlock",
+                          [32m+[0m[0m "s3:PutBucketTagging",
+                          [32m+[0m[0m "s3:GetEncryptionConfiguration",
+                          [32m+[0m[0m "s3:PutEncryptionConfiguration",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "SimpleStorageServiceFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "elasticfilesystem:*",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "ElasticFileSystemFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "ec2:*",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "ElasticComputeCloudFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "iam:AttachRolePolicy",
+                          [32m+[0m[0m "iam:CreateInstanceProfile",
+                          [32m+[0m[0m "iam:CreateRole",
+                          [32m+[0m[0m "iam:DeleteInstanceProfile",
+                          [32m+[0m[0m "iam:DeleteRole",
+                          [32m+[0m[0m "iam:ListRolePolicies",
+                          [32m+[0m[0m "iam:GetInstanceProfile",
+                          [32m+[0m[0m "iam:GetRolePolicy",
+                          [32m+[0m[0m "iam:ListAttachedRolePolicies",
+                          [32m+[0m[0m "iam:ListInstanceProfiles",
+                          [32m+[0m[0m "iam:PutRolePolicy",
+                          [32m+[0m[0m "iam:PassRole",
+                          [32m+[0m[0m "iam:GetRole",
+                          [32m+[0m[0m "iam:AddRoleToInstanceProfile",
+                          [32m+[0m[0m "iam:RemoveRoleFromInstanceProfile",
+                          [32m+[0m[0m "iam:DetachRolePolicy",
+                          [32m+[0m[0m "iam:DeleteRolePolicy",
+                          [32m+[0m[0m "iam:SimulatePrincipalPolicy",
+                          [32m+[0m[0m "iam:ListRoles",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "IdentityAccessManagementFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "iam:CreateServiceLinkedRole",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "arn:aws:iam::*:role/aws-service-role/*",
+                        ]
+                      [32m+[0m[0m Sid      = "IdentityAccessManagementLimited"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "autoscaling:*",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "AutoScalingFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "servicequotas:ListServiceQuotas",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "ServiceQuotas"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "kms:CreateAlias",
+                          [32m+[0m[0m "kms:CreateGrant",
+                          [32m+[0m[0m "kms:CreateKey",
+                          [32m+[0m[0m "kms:Decrypt",
+                          [32m+[0m[0m "kms:EnableKeyRotation",
+                          [32m+[0m[0m "kms:GenerateRandom",
+                          [32m+[0m[0m "kms:ListKeys",
+                          [32m+[0m[0m "kms:ListKeyPolicies",
+                          [32m+[0m[0m "kms:DescribeKey",
+                          [32m+[0m[0m "kms:ListAliases",
+                          [32m+[0m[0m "kms:Encrypt",
+                          [32m+[0m[0m "kms:TagResource",
+                          [32m+[0m[0m "kms:DeleteAlias",
+                          [32m+[0m[0m "kms:PutKeyPolicy",
+                          [32m+[0m[0m "kms:ScheduleKeyDeletion",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "KeyManagementServiceFull"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "ecr:DescribeRepositories",
+                          [32m+[0m[0m "ecr:DescribeImages",
+                          [32m+[0m[0m "ecr:GetAuthorizationToken",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "ECRAccessRead"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "sts:DecodeAuthorizationMessage",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "DecodeAuthorizationMessage"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "ssm:DescribeParameters",
+                          [32m+[0m[0m "ssm:GetParameter",
+                          [32m+[0m[0m "ssm:GetParameters",
+                          [32m+[0m[0m "ssm:GetParameterHistory",
+                          [32m+[0m[0m "ssm:GetParametersByPath",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "arn:aws:ssm:*:*:parameter/aws/service/eks/optimized-ami/*",
+                        ]
+                      [32m+[0m[0m Sid      = "AllowSsmParams"
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = [
+                          [32m+[0m[0m "pricing:GetProducts",
+                        ]
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = [
+                          [32m+[0m[0m "*",
+                        ]
+                      [32m+[0m[0m Sid      = "PriceListService"
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m policy_id   = (known after apply)
+      [32m+[0m[0m tags        = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-xaccount-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all    = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-xaccount-policy"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role.cdp_datalake_admin_role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "cdp_datalake_admin_role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = (known after apply)
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m description           = "CDP Datalake Admin role for kuldeep_cdpdemo."
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "kuldeep_cdpdemo-dladmin-role"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m role_last_used        = (known after apply)
+      [32m+[0m[0m tags                  = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-dladmin-role"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all              = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-dladmin-role"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m unique_id             = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role.cdp_idbroker_role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "cdp_idbroker_role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "ec2.amazonaws.com"
+                        }
+                      [32m+[0m[0m Sid       = ""
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m description           = "CDP IDBroker role for kuldeep_cdpdemo."
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "kuldeep_cdpdemo-idbroker-role"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m role_last_used        = (known after apply)
+      [32m+[0m[0m tags                  = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-idbroker-role"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all              = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-idbroker-role"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m unique_id             = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role.cdp_log_role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "cdp_log_role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "ec2.amazonaws.com"
+                        }
+                      [32m+[0m[0m Sid       = ""
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m description           = "CDP Log role for kuldeep_cdpdemo."
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "kuldeep_cdpdemo-logs-role"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m role_last_used        = (known after apply)
+      [32m+[0m[0m tags                  = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-logs-role"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all              = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-logs-role"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m unique_id             = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role.cdp_ranger_audit_role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "cdp_ranger_audit_role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = (known after apply)
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m description           = "CDP Ranger Audit role for kuldeep_cdpdemo"
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "kuldeep_cdpdemo-audit-role"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m role_last_used        = (known after apply)
+      [32m+[0m[0m tags                  = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-audit-role"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all              = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-audit-role"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m unique_id             = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role.cdp_xaccount_role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "cdp_xaccount_role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Condition = {
+                          [32m+[0m[0m StringEquals = {
+                              [32m+[0m[0m "sts:ExternalId" = "9064e1c3-a080-4d87-91c4-5dc562214a38"
+                            }
+                        }
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m AWS = "arn:aws:iam::387553343826:root"
+                        }
+                      [32m+[0m[0m Sid       = ""
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m description           = "CDP Cross-Account role for kuldeep_cdpdemo."
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "kuldeep_cdpdemo-xaccount-role"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m role_last_used        = (known after apply)
+      [32m+[0m[0m tags                  = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-xaccount-role"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all              = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-xaccount-role"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m unique_id             = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach1[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_datalake_admin_role_attach1" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-dladmin-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach2[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_datalake_admin_role_attach2" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-dladmin-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach3[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_datalake_admin_role_attach3" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-dladmin-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach4[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_datalake_admin_role_attach4" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-dladmin-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_idbroker_role_attach1[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_idbroker_role_attach1" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-idbroker-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_idbroker_role_attach2[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_idbroker_role_attach2" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-idbroker-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach1[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_log_role_attach1" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-logs-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach2[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_log_role_attach2" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-logs-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach3[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_log_role_attach3" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-logs-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach1[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_ranger_audit_role_attach1" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-audit-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach2[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_ranger_audit_role_attach2" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-audit-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach3[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_ranger_audit_role_attach3" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-audit-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach4[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_ranger_audit_role_attach4" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-audit-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_xaccount_role_attach[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cdp_xaccount_role_attach" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "kuldeep_cdpdemo-xaccount-role"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_s3_bucket.cdp_storage_locations["kuldeep_cdpdemo-buk"][0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_bucket" "cdp_storage_locations" {
+      [32m+[0m[0m acceleration_status         = (known after apply)
+      [32m+[0m[0m acl                         = (known after apply)
+      [32m+[0m[0m arn                         = (known after apply)
+      [32m+[0m[0m bucket                      = (known after apply)
+      [32m+[0m[0m bucket_domain_name          = (known after apply)
+      [32m+[0m[0m bucket_prefix               = (known after apply)
+      [32m+[0m[0m bucket_regional_domain_name = (known after apply)
+      [32m+[0m[0m force_destroy               = true
+      [32m+[0m[0m hosted_zone_id              = (known after apply)
+      [32m+[0m[0m id                          = (known after apply)
+      [32m+[0m[0m object_lock_enabled         = (known after apply)
+      [32m+[0m[0m policy                      = (known after apply)
+      [32m+[0m[0m region                      = (known after apply)
+      [32m+[0m[0m request_payer               = (known after apply)
+      [32m+[0m[0m tags                        = (known after apply)
+      [32m+[0m[0m tags_all                    = (known after apply)
+      [32m+[0m[0m website_domain              = (known after apply)
+      [32m+[0m[0m website_endpoint            = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_s3_bucket_public_access_block.cdp_storage_locations["kuldeep_cdpdemo-buk"][0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_bucket_public_access_block" "cdp_storage_locations" {
+      [32m+[0m[0m block_public_acls       = true
+      [32m+[0m[0m block_public_policy     = true
+      [32m+[0m[0m bucket                  = (known after apply)
+      [32m+[0m[0m id                      = (known after apply)
+      [32m+[0m[0m ignore_public_acls      = true
+      [32m+[0m[0m restrict_public_buckets = true
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_s3_object.cdp_backup_storage_object[0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_object" "cdp_backup_storage_object" {
+      [32m+[0m[0m acl                    = "private"
+      [32m+[0m[0m bucket                 = (known after apply)
+      [32m+[0m[0m bucket_key_enabled     = (known after apply)
+      [32m+[0m[0m content_type           = "application/x-directory"
+      [32m+[0m[0m etag                   = (known after apply)
+      [32m+[0m[0m force_destroy          = false
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m key                    = "backups/"
+      [32m+[0m[0m kms_key_id             = (known after apply)
+      [32m+[0m[0m server_side_encryption = (known after apply)
+      [32m+[0m[0m storage_class          = (known after apply)
+      [32m+[0m[0m tags_all               = (known after apply)
+      [32m+[0m[0m version_id             = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_s3_object.cdp_log_storage_object[0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_object" "cdp_log_storage_object" {
+      [32m+[0m[0m acl                    = "private"
+      [32m+[0m[0m bucket                 = (known after apply)
+      [32m+[0m[0m bucket_key_enabled     = (known after apply)
+      [32m+[0m[0m content_type           = "application/x-directory"
+      [32m+[0m[0m etag                   = (known after apply)
+      [32m+[0m[0m force_destroy          = false
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m key                    = "logs/"
+      [32m+[0m[0m kms_key_id             = (known after apply)
+      [32m+[0m[0m server_side_encryption = (known after apply)
+      [32m+[0m[0m storage_class          = (known after apply)
+      [32m+[0m[0m tags_all               = (known after apply)
+      [32m+[0m[0m version_id             = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group.cdp_default_sg[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group" "cdp_default_sg" {
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m description            = "kuldeep_cdpdemo-default-sg"
+      [32m+[0m[0m egress                 = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m ingress                = (known after apply)
+      [32m+[0m[0m name                   = "kuldeep_cdpdemo-default-sg"
+      [32m+[0m[0m name_prefix            = (known after apply)
+      [32m+[0m[0m owner_id               = (known after apply)
+      [32m+[0m[0m revoke_rules_on_delete = false
+      [32m+[0m[0m tags                   = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-default-sg"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all               = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-default-sg"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group.cdp_knox_sg[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group" "cdp_knox_sg" {
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m description            = "kuldeep_cdpdemo-knox-sg"
+      [32m+[0m[0m egress                 = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m ingress                = (known after apply)
+      [32m+[0m[0m name                   = "kuldeep_cdpdemo-knox-sg"
+      [32m+[0m[0m name_prefix            = (known after apply)
+      [32m+[0m[0m owner_id               = (known after apply)
+      [32m+[0m[0m revoke_rules_on_delete = false
+      [32m+[0m[0m tags                   = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-knox-sg"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all               = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-knox-sg"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_egress[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group_rule" "cdp_default_sg_egress" {
+      [32m+[0m[0m cidr_blocks              = [
+          [32m+[0m[0m "0.0.0.0/0",
+        ]
+      [32m+[0m[0m description              = "Egress rule for default CDP security group."
+      [32m+[0m[0m from_port                = 0
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m protocol                 = "-1"
+      [32m+[0m[0m security_group_id        = (known after apply)
+      [32m+[0m[0m security_group_rule_id   = (known after apply)
+      [32m+[0m[0m self                     = false
+      [32m+[0m[0m source_security_group_id = (known after apply)
+      [32m+[0m[0m to_port                  = 0
+      [32m+[0m[0m type                     = "egress"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group_rule" "cdp_default_sg_ingress" {
+      [32m+[0m[0m cidr_blocks              = (known after apply)
+      [32m+[0m[0m description              = "Ingress rules for default CDP security group."
+      [32m+[0m[0m from_port                = 0
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m protocol                 = "-1"
+      [32m+[0m[0m security_group_id        = (known after apply)
+      [32m+[0m[0m security_group_rule_id   = (known after apply)
+      [32m+[0m[0m self                     = false
+      [32m+[0m[0m source_security_group_id = (known after apply)
+      [32m+[0m[0m to_port                  = 0
+      [32m+[0m[0m type                     = "ingress"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group_rule" "cdp_default_sg_ingress" {
+      [32m+[0m[0m cidr_blocks              = [
+          [32m+[0m[0m "0.0.0.0/32",
+        ]
+      [32m+[0m[0m description              = "Ingress rules for default CDP security group."
+      [32m+[0m[0m from_port                = 443
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m protocol                 = "tcp"
+      [32m+[0m[0m security_group_id        = (known after apply)
+      [32m+[0m[0m security_group_rule_id   = (known after apply)
+      [32m+[0m[0m self                     = false
+      [32m+[0m[0m source_security_group_id = (known after apply)
+      [32m+[0m[0m to_port                  = 443
+      [32m+[0m[0m type                     = "ingress"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[2][0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group_rule" "cdp_default_sg_ingress" {
+      [32m+[0m[0m cidr_blocks              = [
+          [32m+[0m[0m "0.0.0.0/32",
+        ]
+      [32m+[0m[0m description              = "Ingress rules for default CDP security group."
+      [32m+[0m[0m from_port                = 22
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m protocol                 = "tcp"
+      [32m+[0m[0m security_group_id        = (known after apply)
+      [32m+[0m[0m security_group_rule_id   = (known after apply)
+      [32m+[0m[0m self                     = false
+      [32m+[0m[0m source_security_group_id = (known after apply)
+      [32m+[0m[0m to_port                  = 22
+      [32m+[0m[0m type                     = "ingress"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress_self[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group_rule" "cdp_default_sg_ingress_self" {
+      [32m+[0m[0m description              = "Self-reference ingress rule"
+      [32m+[0m[0m from_port                = 0
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m protocol                 = "-1"
+      [32m+[0m[0m security_group_id        = (known after apply)
+      [32m+[0m[0m security_group_rule_id   = (known after apply)
+      [32m+[0m[0m self                     = true
+      [32m+[0m[0m source_security_group_id = (known after apply)
+      [32m+[0m[0m to_port                  = 0
+      [32m+[0m[0m type                     = "ingress"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_egress[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group_rule" "cdp_knox_sg_egress" {
+      [32m+[0m[0m cidr_blocks              = [
+          [32m+[0m[0m "0.0.0.0/0",
+        ]
+      [32m+[0m[0m description              = "Egress rule for Knox CDP security group."
+      [32m+[0m[0m from_port                = 0
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m protocol                 = "-1"
+      [32m+[0m[0m security_group_id        = (known after apply)
+      [32m+[0m[0m security_group_rule_id   = (known after apply)
+      [32m+[0m[0m self                     = false
+      [32m+[0m[0m source_security_group_id = (known after apply)
+      [32m+[0m[0m to_port                  = 0
+      [32m+[0m[0m type                     = "egress"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group_rule" "cdp_knox_sg_ingress" {
+      [32m+[0m[0m cidr_blocks              = (known after apply)
+      [32m+[0m[0m description              = "Ingress rule for Knox CDP security group."
+      [32m+[0m[0m from_port                = 0
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m protocol                 = "-1"
+      [32m+[0m[0m security_group_id        = (known after apply)
+      [32m+[0m[0m security_group_rule_id   = (known after apply)
+      [32m+[0m[0m self                     = false
+      [32m+[0m[0m source_security_group_id = (known after apply)
+      [32m+[0m[0m to_port                  = 0
+      [32m+[0m[0m type                     = "ingress"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group_rule" "cdp_knox_sg_ingress" {
+      [32m+[0m[0m cidr_blocks              = [
+          [32m+[0m[0m "0.0.0.0/32",
+        ]
+      [32m+[0m[0m description              = "Ingress rule for Knox CDP security group."
+      [32m+[0m[0m from_port                = 443
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m protocol                 = "tcp"
+      [32m+[0m[0m security_group_id        = (known after apply)
+      [32m+[0m[0m security_group_rule_id   = (known after apply)
+      [32m+[0m[0m self                     = false
+      [32m+[0m[0m source_security_group_id = (known after apply)
+      [32m+[0m[0m to_port                  = 443
+      [32m+[0m[0m type                     = "ingress"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[2][0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group_rule" "cdp_knox_sg_ingress" {
+      [32m+[0m[0m cidr_blocks              = [
+          [32m+[0m[0m "0.0.0.0/32",
+        ]
+      [32m+[0m[0m description              = "Ingress rule for Knox CDP security group."
+      [32m+[0m[0m from_port                = 22
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m protocol                 = "tcp"
+      [32m+[0m[0m security_group_id        = (known after apply)
+      [32m+[0m[0m security_group_rule_id   = (known after apply)
+      [32m+[0m[0m self                     = false
+      [32m+[0m[0m source_security_group_id = (known after apply)
+      [32m+[0m[0m to_port                  = 22
+      [32m+[0m[0m type                     = "ingress"
+    }
+
+[1m  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress_self[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group_rule" "cdp_knox_sg_ingress_self" {
+      [32m+[0m[0m description              = "Self-reference ingress rule."
+      [32m+[0m[0m from_port                = 0
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m protocol                 = "-1"
+      [32m+[0m[0m security_group_id        = (known after apply)
+      [32m+[0m[0m security_group_rule_id   = (known after apply)
+      [32m+[0m[0m self                     = true
+      [32m+[0m[0m source_security_group_id = (known after apply)
+      [32m+[0m[0m to_port                  = 0
+      [32m+[0m[0m type                     = "ingress"
+    }
+
+[1m  # module.ex01_minimal_inputs.cdp_datalake_aws_datalake.cdp_datalake[0m will be created
+[0m  [32m+[0m[0m resource "cdp_datalake_aws_datalake" "cdp_datalake" {
+      [32m+[0m[0m certificate_expiration_state = (known after apply)
+      [32m+[0m[0m cloud_storage_base_location  = (known after apply)
+      [32m+[0m[0m cloudera_manager             = (known after apply)
+      [32m+[0m[0m creation_date                = (known after apply)
+      [32m+[0m[0m credential_crn               = (known after apply)
+      [32m+[0m[0m crn                          = (known after apply)
+      [32m+[0m[0m datalake_name                = "kuldeep_cdpdemo-aw-dl"
+      [32m+[0m[0m enable_ranger_raz            = true
+      [32m+[0m[0m endpoints                    = (known after apply)
+      [32m+[0m[0m environment_crn              = (known after apply)
+      [32m+[0m[0m environment_name             = "kuldeep_cdpdemo-cdp-env"
+      [32m+[0m[0m id                           = (known after apply)
+      [32m+[0m[0m instance_groups              = (known after apply)
+      [32m+[0m[0m instance_profile             = (known after apply)
+      [32m+[0m[0m multi_az                     = true
+      [32m+[0m[0m product_versions             = (known after apply)
+      [32m+[0m[0m region                       = (known after apply)
+      [32m+[0m[0m runtime                      = "7.2.16"
+      [32m+[0m[0m scale                        = "LIGHT_DUTY"
+      [32m+[0m[0m status                       = (known after apply)
+      [32m+[0m[0m status_reason                = (known after apply)
+      [32m+[0m[0m storage_bucket_location      = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.cdp_environments_aws_credential.cdp_cred[0m will be created
+[0m  [32m+[0m[0m resource "cdp_environments_aws_credential" "cdp_cred" {
+      [32m+[0m[0m credential_name = "kuldeep_cdpdemo-xaccount-cred"
+      [32m+[0m[0m crn             = (known after apply)
+      [32m+[0m[0m description     = "AWS Cross Account Credential for AWS env kuldeep_cdpdemo-cdp-env"
+      [32m+[0m[0m id              = (known after apply)
+      [32m+[0m[0m role_arn        = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env[0m will be created
+[0m  [32m+[0m[0m resource "cdp_environments_aws_environment" "cdp_env" {
+      [32m+[0m[0m authentication                     = {
+          [32m+[0m[0m public_key_id = "cdpdemo"
+        }
+      [32m+[0m[0m create_private_subnets             = false
+      [32m+[0m[0m create_service_endpoints           = false
+      [32m+[0m[0m credential_name                    = "kuldeep_cdpdemo-xaccount-cred"
+      [32m+[0m[0m crn                                = (known after apply)
+      [32m+[0m[0m description                        = (known after apply)
+      [32m+[0m[0m enable_tunnel                      = true
+      [32m+[0m[0m endpoint_access_gateway_scheme     = "PRIVATE"
+      [32m+[0m[0m endpoint_access_gateway_subnet_ids = [
+          [32m+[0m[0m (known after apply),
+          [32m+[0m[0m (known after apply),
+          [32m+[0m[0m (known after apply),
+          [32m+[0m[0m (known after apply),
+          [32m+[0m[0m (known after apply),
+        ]
+      [32m+[0m[0m environment_name                   = "kuldeep_cdpdemo-cdp-env"
+      [32m+[0m[0m freeipa                            = {
+          [32m+[0m[0m instance_count_by_group = 3
+          [32m+[0m[0m multi_az                = true
+        }
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m log_storage                        = {
+          [32m+[0m[0m backup_storage_location_base = (known after apply)
+          [32m+[0m[0m instance_profile             = (known after apply)
+          [32m+[0m[0m storage_location_base        = (known after apply)
+        }
+      [32m+[0m[0m network_cidr                       = (known after apply)
+      [32m+[0m[0m region                             = "us-east-1"
+      [32m+[0m[0m report_deployment_logs             = (known after apply)
+      [32m+[0m[0m security_access                    = {
+          [32m+[0m[0m cidr                       = (known after apply)
+          [32m+[0m[0m default_security_group_id  = (known after apply)
+          [32m+[0m[0m security_group_id_for_knox = (known after apply)
+        }
+      [32m+[0m[0m status                             = (known after apply)
+      [32m+[0m[0m status_reason                      = (known after apply)
+      [32m+[0m[0m subnet_ids                         = [
+          [32m+[0m[0m (known after apply),
+          [32m+[0m[0m (known after apply),
+          [32m+[0m[0m (known after apply),
+          [32m+[0m[0m (known after apply),
+          [32m+[0m[0m (known after apply),
+        ]
+      [32m+[0m[0m tags                               = (known after apply)
+      [32m+[0m[0m tunnel_type                        = (known after apply)
+      [32m+[0m[0m vpc_id                             = (known after apply)
+      [32m+[0m[0m workload_analytics                 = true
+    }
+
+[1m  # module.ex01_minimal_inputs.cdp_environments_id_broker_mappings.cdp_idbroker[0m will be created
+[0m  [32m+[0m[0m resource "cdp_environments_id_broker_mappings" "cdp_idbroker" {
+      [32m+[0m[0m data_access_role                    = (known after apply)
+      [32m+[0m[0m environment_crn                     = (known after apply)
+      [32m+[0m[0m environment_name                    = "kuldeep_cdpdemo-cdp-env"
+      [32m+[0m[0m id                                  = (known after apply)
+      [32m+[0m[0m mappings                            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m accessor_crn = (known after apply)
+              [32m+[0m[0m role         = (known after apply)
+            },
+          [32m+[0m[0m {
+              [32m+[0m[0m accessor_crn = (known after apply)
+              [32m+[0m[0m role         = (known after apply)
+            },
+        ]
+      [32m+[0m[0m mappings_version                    = (known after apply)
+      [32m+[0m[0m ranger_audit_role                   = (known after apply)
+      [32m+[0m[0m ranger_cloud_access_authorizer_role = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.cdp_iam_group.cdp_admin_group[0m will be created
+[0m  [32m+[0m[0m resource "cdp_iam_group" "cdp_admin_group" {
+      [32m+[0m[0m crn                           = (known after apply)
+      [32m+[0m[0m group_name                    = "kuldeep_cdpdemo-cdp-admin-group"
+      [32m+[0m[0m id                            = (known after apply)
+      [32m+[0m[0m sync_membership_on_user_login = false
+    }
+
+[1m  # module.ex01_minimal_inputs.cdp_iam_group.cdp_user_group[0m will be created
+[0m  [32m+[0m[0m resource "cdp_iam_group" "cdp_user_group" {
+      [32m+[0m[0m crn                           = (known after apply)
+      [32m+[0m[0m group_name                    = "kuldeep_cdpdemo-cdp-user-group"
+      [32m+[0m[0m id                            = (known after apply)
+      [32m+[0m[0m sync_membership_on_user_login = false
+    }
+
+[1m  # module.ex01_minimal_inputs.random_id.bucket_suffix[0][0m will be created
+[0m  [32m+[0m[0m resource "random_id" "bucket_suffix" {
+      [32m+[0m[0m b64_std     = (known after apply)
+      [32m+[0m[0m b64_url     = (known after apply)
+      [32m+[0m[0m byte_length = 4
+      [32m+[0m[0m dec         = (known after apply)
+      [32m+[0m[0m hex         = (known after apply)
+      [32m+[0m[0m id          = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.time_sleep.iam_propagation[0m will be created
+[0m  [32m+[0m[0m resource "time_sleep" "iam_propagation" {
+      [32m+[0m[0m create_duration = "45s"
+      [32m+[0m[0m id              = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_internet_gateway.this[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_internet_gateway" "this" {
+      [32m+[0m[0m arn      = (known after apply)
+      [32m+[0m[0m id       = (known after apply)
+      [32m+[0m[0m owner_id = (known after apply)
+      [32m+[0m[0m tags     = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-net"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-net"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m vpc_id   = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route.public_internet_gateway[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_route" "public_internet_gateway" {
+      [32m+[0m[0m destination_cidr_block = "0.0.0.0/0"
+      [32m+[0m[0m gateway_id             = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m instance_id            = (known after apply)
+      [32m+[0m[0m instance_owner_id      = (known after apply)
+      [32m+[0m[0m network_interface_id   = (known after apply)
+      [32m+[0m[0m origin                 = (known after apply)
+      [32m+[0m[0m route_table_id         = (known after apply)
+      [32m+[0m[0m state                  = (known after apply)
+
+      [32m+[0m[0m timeouts {
+          [32m+[0m[0m create = "5m"
+        }
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table.public[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "public" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m route            = (known after apply)
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-net-public"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-net-public"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[2][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[3][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[4][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1a"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.10.0.0/19"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name"                   = "kuldeep_cdpdemo-net-public-us-east-1a"
+          [32m+[0m[0m "agent_source"           = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"             = "kuldeep_cdpdemo"
+          [32m+[0m[0m "kubernetes.io/role/elb" = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name"                   = "kuldeep_cdpdemo-net-public-us-east-1a"
+          [32m+[0m[0m "agent_source"           = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"             = "kuldeep_cdpdemo"
+          [32m+[0m[0m "kubernetes.io/role/elb" = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1b"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.10.32.0/19"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name"                   = "kuldeep_cdpdemo-net-public-us-east-1b"
+          [32m+[0m[0m "agent_source"           = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"             = "kuldeep_cdpdemo"
+          [32m+[0m[0m "kubernetes.io/role/elb" = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name"                   = "kuldeep_cdpdemo-net-public-us-east-1b"
+          [32m+[0m[0m "agent_source"           = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"             = "kuldeep_cdpdemo"
+          [32m+[0m[0m "kubernetes.io/role/elb" = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[2][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1c"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.10.64.0/19"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name"                   = "kuldeep_cdpdemo-net-public-us-east-1c"
+          [32m+[0m[0m "agent_source"           = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"             = "kuldeep_cdpdemo"
+          [32m+[0m[0m "kubernetes.io/role/elb" = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name"                   = "kuldeep_cdpdemo-net-public-us-east-1c"
+          [32m+[0m[0m "agent_source"           = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"             = "kuldeep_cdpdemo"
+          [32m+[0m[0m "kubernetes.io/role/elb" = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[3][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1d"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.10.96.0/19"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name"                   = "kuldeep_cdpdemo-net-public-us-east-1d"
+          [32m+[0m[0m "agent_source"           = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"             = "kuldeep_cdpdemo"
+          [32m+[0m[0m "kubernetes.io/role/elb" = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name"                   = "kuldeep_cdpdemo-net-public-us-east-1d"
+          [32m+[0m[0m "agent_source"           = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"             = "kuldeep_cdpdemo"
+          [32m+[0m[0m "kubernetes.io/role/elb" = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[4][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1f"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.10.128.0/19"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name"                   = "kuldeep_cdpdemo-net-public-us-east-1f"
+          [32m+[0m[0m "agent_source"           = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"             = "kuldeep_cdpdemo"
+          [32m+[0m[0m "kubernetes.io/role/elb" = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name"                   = "kuldeep_cdpdemo-net-public-us-east-1f"
+          [32m+[0m[0m "agent_source"           = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"             = "kuldeep_cdpdemo"
+          [32m+[0m[0m "kubernetes.io/role/elb" = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_vpc.this[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_vpc" "this" {
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m cidr_block                           = "10.10.0.0/16"
+      [32m+[0m[0m default_network_acl_id               = (known after apply)
+      [32m+[0m[0m default_route_table_id               = (known after apply)
+      [32m+[0m[0m default_security_group_id            = (known after apply)
+      [32m+[0m[0m dhcp_options_id                      = (known after apply)
+      [32m+[0m[0m enable_classiclink                   = (known after apply)
+      [32m+[0m[0m enable_classiclink_dns_support       = (known after apply)
+      [32m+[0m[0m enable_dns_hostnames                 = true
+      [32m+[0m[0m enable_dns_support                   = true
+      [32m+[0m[0m enable_network_address_usage_metrics = (known after apply)
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_tenancy                     = "default"
+      [32m+[0m[0m ipv6_association_id                  = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                      = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_network_border_group = (known after apply)
+      [32m+[0m[0m main_route_table_id                  = (known after apply)
+      [32m+[0m[0m owner_id                             = (known after apply)
+      [32m+[0m[0m tags                                 = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-net"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+      [32m+[0m[0m tags_all                             = {
+          [32m+[0m[0m "Name"         = "kuldeep_cdpdemo-net"
+          [32m+[0m[0m "agent_source" = "tf-cdp-module"
+          [32m+[0m[0m "env_prefix"   = "kuldeep_cdpdemo"
+        }
+    }
+
+[1mPlan:[0m 69 to add, 0 to change, 0 to destroy.
+[0m[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.

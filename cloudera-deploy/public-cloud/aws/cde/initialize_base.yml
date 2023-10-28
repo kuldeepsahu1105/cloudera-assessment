@@ -1,0 +1,265 @@
+---
+
+# Copyright 2023 Cloudera, Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: Retrieve CDP Environment details
+  cloudera.cloud.env_info:
+    name: "{{ run__env_name }}"
+  register: __cdp_env_info
+  failed_when: __cdp_env_info.environments is not defined
+
+- name: Set fact for CDP Environment CRN
+  when: __cdp_env_info.environments | length > 0
+  ansible.builtin.set_fact:
+    run__cdp_env_crn: "{{ __cdp_env_info.environments[0].crn }}"
+
+- name: Discover CDP Datalake version
+  when: plat__cdp_datalake_version is undefined
+  block:
+    - name: Retrieve CDP Datalake details for Environment
+      cloudera.cloud.datalake_info:
+        env: "{{ run__env_name }}"
+      register: __cdp_datalake_info
+      failed_when: __cdp_datalake_info.datalakes is not defined
+
+    - name: Set fact for CDP Datalake version
+      ansible.builtin.set_fact:
+        run__cdp_datalake_version: "{{ __cdp_datalake_info | community.general.json_query(query) | regex_search('^\\d+\\.\\d+\\.\\d+') }}"
+      vars:
+        query: "datalakes[].productVersions[?name=='CDH'].version | [0][0]"
+
+    - name: Retrieve default CDP Datalake Runtime version if required
+      when: run__cdp_datalake_version | length < 1
+      cloudera.cloud.datalake_runtime_info:
+        default: yes
+      register: __cdp_datalake_version_info
+      failed_when: __cdp_datalake_version_info.versions is not defined
+
+    - name: Set fact for CDP Datalake version to available default
+      when: run__cdp_datalake_version | length < 1
+      ansible.builtin.set_fact:
+        run__cdp_datalake_version: "{{ __cdp_datalake_version_info.versions[0].runtimeVersion | trim }}"
+
+# TODO Discover version if upstream is not present
+- name: Set fact for CDP Datalake version by assignment
+  when: plat__cdp_datalake_version is defined
+  ansible.builtin.set_fact:
+    run__cdp_datalake_version: "{{ plat__cdp_datalake_version }}"
+
+- name: Prepare for CDP Datahub clusters
+  when: run__include_datahub
+  tags: dh
+  block:
+    - name: Retrieve Image Catalog File
+      ansible.builtin.uri:
+        url: "{{ run__datahub_image_catalog_url }}"
+      no_log: yes
+      register: __datahub_image_catalog
+
+    - name: Set fact for latest CDP Image in Catalog
+      ansible.builtin.set_fact:
+        run__datahub_image_catalog_entry: "{{ __datahub_image_catalog.json.images['cdh-images'] | community.general.json_query(builds) | sort(attribute='created', reverse=True) | first }}"
+      vars:
+        builds: "[? version=='{{ run__cdp_datalake_version }}' && contains(keys(images), '{{ run__infra_type }}')]"
+
+    - name: Retrieve available CDP Datahub templates
+      cloudera.cloud.datahub_template_info:
+      register: __datahub_template_info
+
+    - name: Set fact for available CDP Datahub templates by Datalake version
+      ansible.builtin.set_fact:
+        run__datahub_available_templates: "{{ __datahub_template_info.templates | selectattr('productVersion', 'search', run__cdp_datalake_version) | map(attribute='clusterTemplateName') | list }}"
+
+    - name: Retrieve available CDP Datahub definitions
+      cloudera.cloud.datahub_definition_info:
+      register: __datahub_definition_info
+
+    - name: Set fact for available CDP Datahub definitions by Datalake version and Cloud Platform
+      ansible.builtin.set_fact:
+        run__datahub_available_definitions: "{{ __datahub_definition_info.definitions | selectattr('productVersion', 'search', run__cdp_datalake_version) | selectattr('cloudPlatform', 'search', run__infra_type.upper()) | map(attribute='clusterDefinitionName') | list }}"
+
+    - name: Construct CDP Datahub configurations
+      ansible.builtin.set_fact:
+        run__datahub_configs: "{{ run__datahub_configs | default([]) | union([config]) }}"
+      vars:
+        include: "{{ lookup('template', __datahub_config.include | default('experiences_config_placeholder.j2')) | from_yaml }}"
+        overlay: "{{ __datahub_config.instance_groups | default(include.instance_groups | default([]) ) }}"
+        base: "{{ run__datahub_instance_group_base }}"
+        config:
+          name: "{{ __datahub_config.name | default([run__namespace_cdp, __datahub_config.suffix | default(include.suffix) | default(run__datahub_suffix)] | join('-')) }}"
+          template: "{{ __datahub_config.template | default(include.template | default(omit) ) }}"
+          definition: "{{ __datahub_config.definition | default(include.definition | default(omit) ) }}"
+          instance_groups: "{{ (overlay | length > 0) | ternary(overlay | map('cloudera.exe.combine_onto', base, recursive=True) | list, omit) }}"
+          extension: "{{ __datahub_config.extension | default(omit) }}"
+          subnets_filter: "{{ __datahub_config.subnets_filter | default(omit) }}"
+          multi_az: "{{ __datahub_config.multi_az | default(omit) }}"
+          tags: "{{ __datahub_config.tags | default(run__datahub_tags) }}"
+      loop: "{{ run__datahub_definitions }}"
+      loop_control:
+        loop_var: __datahub_config
+        label: "{{ config.name }}"
+      failed_when:
+        - "'template' in __datahub_config or 'template' in include"
+        - run__datahub_available_templates | select('search', config.template) | list | length < 1
+
+    - name: Check CDP Datahub names
+      ansible.builtin.assert:
+        that:
+          - "not ('{{ __datahub_config.name }}' | regex_search('[^-a-z0-9]+'))"
+        fail_msg: >-
+          CDP Datahub name must contain only lowercase letters, numbers, and hypens.
+        quiet: yes
+      loop_control:
+        loop_var: __datahub_config
+      loop: "{{ run__datahub_configs }}"
+
+- name: Prepare for CDP OpDB experiences
+  tags: opdb
+  when: run__include_opdb
+  block:
+    - name: Construct OpDB Configurations
+      ansible.builtin.set_fact:
+        run__opdb_configs: "{{ run__opdb_configs | default([]) | union([config]) }}"
+      vars:
+        include: "{{ lookup('template', __opdb_config.include | default('experiences_config_placeholder.j2')) | from_yaml }}"
+        config:
+          name: "{{ __opdb_config.name | default([run__namespace, __opdb_config.suffix | default(include.suffix) | default(run__opdb_suffix)] | join('-')) }}"
+      loop: "{{ run__opdb_definitions }}"
+      loop_control:
+        loop_var: __opdb_config
+        label: "{{ config.name }}"
+
+- name: Prepare for CDP ML Workspace experiences
+  tags: ml
+  when: run__include_ml
+  block:
+    - name: Construct CDP ML Workspace configurations
+      ansible.builtin.set_fact:
+        run__ml_configs: "{{ run__ml_configs | default([]) | union([config]) }}"
+      vars:
+        include: "{{ lookup('template', __ml_config.include | default('experiences_config_placeholder.j2')) | from_yaml }}"
+        overlay_instance_groups: "{{ __ml_config.instance_groups | default(include.instance_groups) | default([]) }}"
+        overlay_tags: "{{ __ml_config.tags | default(include.tags) | default(run__ml_tags) }}"
+        overlay_network: "{{ __ml_config.network | default(include.network) | default({}) }}"
+        base_instance_group: "{{ run__ml_k8s_request_base }}"
+        config:
+          name: "{{ __ml_config.name | default([run__namespace_cdp, __ml_config.suffix | default(include.suffix) | default(run__ml_suffix)] | join('-')) }}"
+          nfs: "{{ __ml_config.nfs | default(run__azure_netapp_nfs_mount | default(omit)) }}"
+          nfs_version: "{{ __ml_config.nfs_version | default((__ml_config.nfs is defined or run__azure_netapp_nfs_mount is defined) | ternary(run__azure_netapp_nfs_version, omit)) }}"
+          k8s_request:
+            environmentName: "{{ run__env_name }}"
+            instanceGroups: "{{ overlay_instance_groups | map('cloudera.exe.combine_onto', base_instance_group, recursive=True) | list }}"
+            tags: "{{ overlay_tags }}"
+            network: "{{ overlay_network }}"
+          raw: "{{ __ml_config }}"
+          public_loadbalancer: "{{ run__ml_public_loadbalancer }}"
+      loop: "{{ run__ml_definitions }}"
+      loop_control:
+        loop_var: __ml_config
+        label: "{{ config.name }}"
+
+- name: Prepare for CDP DE Service experiences
+  tags: de
+  when: run__include_de
+  block:
+    - name: Construct CDP DE Service configurations
+      ansible.builtin.set_fact:
+        run__de_configs: "{{ run__de_configs | default([]) | union([config]) }}"
+      vars:
+        include: "{{ lookup('template', __de_config.include | default('experiences_config_placeholder.j2')) | from_yaml }}"
+        overlay_tags: "{{ __de_config.tags | default(include.tags) | default(run__de_tags) }}"
+        config:
+          name: "{{ __de_config.name | default([run__namespace_cdp, __de_config.suffix | default(include.suffix) | default(run__de_suffix)] | join('-')) }}"
+          raw: "{{ __de_config }}"
+      loop: "{{ run__de_definitions }}"
+      loop_control:
+        loop_var: __de_config
+        label: "{{ config.name }}"
+
+
+- name: Prepare for CDP DW experiences
+  when: run__include_dw
+  block:
+    - name: Construct CDP DW Data Catalog configurations
+      ansible.builtin.set_fact:
+        run__dw_dbc_configs: "{{ run__dw_dbc_configs | default([]) | union([config]) }}"
+      vars:
+        include: "{{ lookup('template', __dw_config.include | default('experiences_config_placeholder.j2')) | from_yaml }}"
+        config:
+          name: "{{ __dw_config.name | default(run__dw_default_dbc) }}"
+          load_demo_data: "{{ __dw_config.load_demo_data | default(False) | bool }}"
+          virtual_warehouses: "{{ __dw_config.virtual_warehouses | default([]) }}"
+          use_default_dbc: "{{ __dw_config.use_default_dbc | default(True) | bool }}"
+      loop: "{{ run__dw_definitions }}"
+      loop_control:
+        loop_var: __dw_config
+        index_var: __dw_config_index
+
+    - name: Ensure runtime configs is initialized
+      ansible.builtin.set_fact:
+        run__dw_vw_configs: "{{ run__dw_vw_configs | default([]) }}"
+
+    - name: Construct CDP DW Virtual Warehouse configurations
+      ansible.builtin.set_fact:
+        run__dw_vw_configs: "{{ run__dw_vw_configs | union([config]) }}"
+      vars:
+        config:
+          dbc_name: "{{ __dw_config.0.name }}"
+          name: "{{ __dw_config.1.name | default([run__namespace, run__dw_vw_suffix ,__dw_dbc_index] | join('-')) }}"
+          use_default_dbc: "{{ __dw_config.0.use_default_dbc }}"
+          type: "{{ __dw_config.1.type | default(run__dw_default_vw_type) }}"
+          template: "{{ __dw_config.1.template | default(run__dw_default_template_type) }}"
+          tags: "{{ __dw_config.1.tags | default({}) | combine(run__dw_tags) }}"
+          autoscaling: "{{ __dw_config.1.autoscaling | default({}) }}"
+          configs: "{{ __dw_config.1.configs | default({}) }}"
+      loop: "{{ run__dw_dbc_configs | default({}) | subelements('virtual_warehouses')}}"
+      loop_control:
+        loop_var: __dw_config
+        index_var: __dw_dbc_index
+        label: "{{ config.name }}"
+
+    - name: Check CDP DW Virtual Warehouse tags
+      when: __dw_vw_config.tags | length > 0
+      ansible.builtin.assert:
+        that:
+          - __dw_vw_config.tags | dict2items | rejectattr('value', 'regex', '[^-_a-zA-Z0-9.=:+@]+') | list
+        fail_msg: 
+          - "A tag in Data Warehouse, '{{ __dw_vw_config.name }}', does not meet requirements;"
+          - "current tags: {{ __dw_vw_config.tags}}."
+          - "Allowed characters in tags are letters, numbers and the following characters: _.:/=+-@"
+        quiet: yes
+      loop_control:
+        loop_var: __dw_vw_config
+        label: "{{ __dw_vw_config.name }}"
+      loop: "{{ run__dw_vw_configs }}"
+
+- name: Prepare for CDP DF Service experiences
+  tags: df
+  when:
+    - run__include_df
+    - run__df_deployments | length > 0
+  block:
+    - name: Construct CDP DF Deployment configurations
+      ansible.builtin.set_fact:
+        run__df_configs: "{{ run__df_configs | default([]) | union([config]) }}"
+      vars:
+        include: "{{ lookup('template', __df_config.include | default('experiences_config_placeholder.j2')) | from_yaml }}"
+        config:
+          name: "{{ __df_config.name | default([run__namespace_cdp, __df_config.flow_name[::2] | replace(' ','') ] | join('-')) }}"
+          raw: "{{ __df_config }}"
+      loop: "{{ run__df_deployments }}"
+      loop_control:
+        loop_var: __df_config
+        label: "{{ config.name }}"

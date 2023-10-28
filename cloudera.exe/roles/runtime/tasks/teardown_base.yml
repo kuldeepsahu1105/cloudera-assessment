@@ -1,0 +1,299 @@
+---
+
+# Copyright 2023 Cloudera, Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: Execute CDP OpDB teardown
+  when:
+    - run__include_opdb or run__force_teardown | bool
+    - run__opdb_configs is defined
+    - run__opdb_configs | length > 0
+  cloudera.cloud.opdb:
+    env: "{{ run__env_name }}"
+    name: "{{ __opdb_config.name }}"
+    state: absent
+    wait: yes
+  loop_control:
+    loop_var: __opdb_config
+    label: "{{ __opdb_config.name | default('opdb') }}"
+  loop: "{{ run__opdb_configs }}"
+  async: 3600 # 1 hour timeout
+  poll: 0
+  register: __opdb_teardowns_info
+
+- name: Execute CDP Data Warehouse virtual warehouse teardown
+  when:
+    - run__include_dw
+    - not run__force_teardown | bool and not run__dw_force_delete | bool
+    - run__env_info.environments | length > 0
+  block:
+    - name: Execute CDP Data Warehouse virtual warehouses (noncompactor VWs) teardown
+      cloudera.cloud.dw_virtual_warehouse:
+        cluster_id: "{{ __dw_cluster_id }}"
+        id: "{{ __vw_id.id }}"
+        state: absent
+        wait: yes
+      loop: "{{ __dw_vw_list.virtual_warehouses | default([]) }}"
+      loop_control:
+        loop_var: __vw_id
+        label: "{{ __vw_id.name }}"
+      register: __dw_vw_teardown_info
+      async: 3600 # 1 hour timeout
+      poll: 0
+
+    - name: Wait for CDP Data Warehouse virtual warehouses (noncompactor VWs) to decommission
+      ansible.builtin.async_status:
+        jid: "{{ __dw_vw_teardown_item.ansible_job_id }}"
+      loop_control:
+        loop_var: __dw_vw_teardown_item
+        label: "{{ __dw_vw_teardown_item.__vw_id.name }}"
+      loop: "{{ __dw_vw_teardown_info.results | default([]) }}"
+      register: __dw_vw_teardowns_async
+      until: __dw_vw_teardowns_async.finished
+      retries: 30
+      delay: 10
+  
+  rescue:
+    - name: Execute CDP Data Warehouse virtual warehouse teardown (compactor VWs)
+      cloudera.cloud.dw_virtual_warehouse:
+        cluster_id: "{{ __dw_cluster_id }}"
+        id: "{{ __dw_vw_compactor_item.__dw_vw_teardown_item.__vw_id.id }}"
+        state: absent
+        wait: yes
+      loop: "{{ ansible_failed_result.results }}"
+      when: __dw_vw_compactor_item.failed | bool
+      loop_control:
+        loop_var: __dw_vw_compactor_item
+        label: "{{ __dw_vw_compactor_item.__dw_vw_teardown_item.__vw_id.name }}"
+      register: __dw_vw_compactor_info
+      async: 3600 # 1 hour timeout
+      poll: 0
+
+    - name: Wait for CDP Data Warehouse virtual warehouses (compactor) to decommission
+      ansible.builtin.async_status:
+        jid: "{{ __dw_vw_compactor_teardown_item.ansible_job_id }}"
+      loop_control:
+        loop_var: __dw_vw_compactor_teardown_item
+        label: "{{ __dw_vw_compactor_teardown_item.__dw_vw_compactor_item.__dw_vw_teardown_item.__vw_id.name }}"
+      loop: "{{ __dw_vw_compactor_info.results }}"
+      when: __dw_vw_compactor_teardown_item.ansible_job_id is defined
+      register: __dw_vw_compactor_teardowns_async
+      until: __dw_vw_compactor_teardowns_async.finished
+      retries: 30
+      delay: 10
+
+- name: Execute CDP Data Warehouse database catalog teardown
+  when:
+    - run__include_dw
+    - not run__force_teardown | bool and not run__dw_force_delete | bool
+    - run__env_info.environments | length > 0
+  cloudera.cloud.dw_database_catalog:
+    cluster_id: "{{ __dw_cluster_id }}"
+    id: "{{ __dbc_id.id }}"
+    state: absent
+    wait: yes
+  loop: "{{ __dw_dbc_list.database_catalogs | default([]) }}"
+  loop_control:
+    loop_var: __dbc_id
+    label: "{{ __dbc_id.name }}"
+  async: 3600 # 1 hour timeout
+  poll: 0
+  register: __dw_dbc_teardown_info
+
+- name: Execute CDP Dataflow teardown
+  when:
+    - run__include_df or run__force_teardown | bool
+    - run__df_service_info is defined and run__df_service_info.services is defined
+    - run__df_service_info.services | length > 0
+  cloudera.cloud.df_service:
+    df_crn: "{{ __df_teardown_req_item.crn }}"
+    persist: "{{ run__df_persist }}"
+    force: "{{ run__df_force_delete }}"
+    terminate: "{{ run__df_terminate_deployments }}"
+    state: absent
+    wait: no
+  loop_control:
+    loop_var: __df_teardown_req_item
+  loop: "{{ run__df_service_info.services }}"
+  register: __df_teardown_info
+
+- name: Execute CDP ML Workspace teardown
+  when:
+    - run__include_ml or run__force_teardown | bool
+    - run__ml_configs is defined
+    - run__ml_configs | length > 0
+  cloudera.cloud.ml:
+    name: "{{ __ml_config_item.name }}"
+    env: "{{ run__env_name }}"
+    state: absent
+    remove_storage: "{{ run__ml_remove_storage }}"
+    force_delete: "{{ run__ml_force_delete }}"
+  loop_control:
+    loop_var: __ml_config_item
+    label: "{{ __ml_config_item.name | default('ml') }}"
+  loop: "{{ run__ml_configs }}"
+  async: 3600 # 1 hour timeout
+  poll: 0
+  register: __ml_teardowns_info
+
+- name: Execute CDP DE Service teardown
+  when:
+    - run__include_de or run__force_teardown | bool
+    - run__de_configs is defined
+    - run__de_configs | length > 0
+  cloudera.cloud.de:
+    name: "{{ __de_config_item.name }}"
+    env: "{{ run__env_name }}"
+    state: absent
+    force_delete: "{{ run__de_force_delete }}"
+  loop_control:
+    loop_var: __de_config_item
+    label: "{{ __de_config_item.name | default('de') }}"
+  loop: "{{ run__de_configs }}"
+  async: 7200 # 2 hour timeout
+  poll: 0
+  register: __de_teardowns_info
+
+- name: Execute CDP Datahub teardown
+  when:
+    - run__include_datahub or run__force_teardown | bool
+    - run__datahub_configs is defined
+    - run__datahub_configs | length > 0
+  cloudera.cloud.datahub_cluster:
+    name: "{{ __datahub_config_item.name }}"
+    state: absent
+    force: "{{ run__datahub_force_teardown }}"
+    wait: yes
+  loop_control:
+    loop_var: __datahub_config_item
+    label: "{{ __datahub_config_item.name | default('datahub') }}"
+  loop: "{{ run__datahub_configs }}"
+  async: 3600 # 1 hour timeout
+  poll: 0
+  register: __datahub_teardowns_info
+
+- name: Wait for CDP ML Workspace deployments to decommission
+  when:
+    - __ml_teardowns_info is defined
+    - __ml_teardowns_info.results is defined
+    - __ml_teardowns_info.results | length > 0
+  ansible.builtin.async_status:
+    jid: "{{ __ml_teardown.ansible_job_id }}"
+  loop_control:
+    loop_var: __ml_teardown
+    label: "{{ __ml_teardown.__ml_config_item.name | default('ml') }}"
+  loop: "{{ __ml_teardowns_info.results }}"
+  register: __ml_teardowns_async
+  until: __ml_teardowns_async.finished
+  retries: 120
+  delay: 30
+
+- name: Wait for CDP DE Service deployments to decommission
+  when:
+    - __de_teardowns_info is defined
+    - __de_teardowns_info.results is defined
+    - __de_teardowns_info.results | length > 0
+  ansible.builtin.async_status:
+    jid: "{{ __de_teardown.ansible_job_id }}"
+  loop_control:
+    loop_var: __de_teardown
+    label: "{{ __de_teardown.__de_config_item.name | default('de') }}"
+  loop: "{{ __de_teardowns_info.results }}"
+  register: __de_teardowns_async
+  until: __de_teardowns_async.finished
+  retries: 120
+  delay: 60
+
+- name: Wait for CDP Datahub deployments to decommission
+  when:
+    - __datahub_teardowns_info is defined
+    - __datahub_teardowns_info.results is defined
+    - __datahub_teardowns_info.results | length > 0
+  ansible.builtin.async_status:
+    jid: "{{ __datahub_teardown_item.ansible_job_id }}"
+  loop_control:
+    loop_var: __datahub_teardown_item
+    label: "{{ __datahub_teardown_item.__datahub_config_item.name | default('datahub') }}"
+  loop: "{{ __datahub_teardowns_info.results }}"
+  register: __datahub_teardowns_async
+  until: __datahub_teardowns_async.finished
+  retries: 120
+  delay: 30
+
+- name: Wait for CDP Data Warehouse deployments to decommission
+  when: __dw_dbc_teardown_info is defined and __dw_dbc_teardown_info.results is defined # and not __dw_dbc_teardown_item.skipped
+  ansible.builtin.async_status:
+    jid: "{{ __dw_dbc_teardown_item.ansible_job_id }}"
+  loop_control:
+    loop_var: __dw_dbc_teardown_item
+    label: "{{ __dw_dbc_teardown_item.__dbc_id.name }}"
+  loop: "{{ __dw_dbc_teardown_info.results }}"
+  register: __dw_dbc_teardowns_async
+  until: __dw_dbc_teardowns_async.finished
+  retries: 120
+  delay: 30
+
+- name: Execute CDP Data Warehouse cluster teardown
+  when:
+    - run__include_dw or run__force_teardown | bool
+    - run__env_info.environments | length > 0
+  cloudera.cloud.dw_cluster:
+    env: "{{ run__env_name }}"
+    state: absent
+    wait: yes
+    force: "{{ run__dw_force_delete or run__force_teardown }}"
+
+- name: Wait for CDP OpDB deployments to decommission
+  when:
+    - __opdb_teardowns_info is defined
+    - __opdb_teardowns_info.results is defined
+    - __opdb_teardowns_info.results | length > 0
+  ansible.builtin.async_status:
+    jid: "{{ __opdb_teardown.ansible_job_id }}"
+  loop_control:
+    loop_var: __opdb_teardown
+    label: "{{ __opdb_teardown.__opdb_config.name | default('opdb') }}"
+  loop: "{{ __opdb_teardowns_info.results }}"
+  register: __opdb_teardowns_async
+  until: __opdb_teardowns_async.finished
+  retries: 120
+  delay: 30
+
+- name: Wait for CDP Dataflow Service to decommission
+  when:
+    - run__include_df
+    - run__df_service_info.services | length > 0
+  cloudera.cloud.df_service:
+    df_crn: "{{ __df_teardown_wait_item.crn }}"
+    persist: "{{ run__df_persist }}"
+    force: "{{ run__df_force_delete }}"
+    terminate: "{{ run__df_terminate_deployments }}"
+    state: absent
+    wait: yes
+  loop_control:
+    loop_var: __df_teardown_wait_item
+  loop: "{{ run__df_service_info.services }}"
+
+- name: Ensure requested CDP DF ReadyFlow imports are deleted from Tenant
+  when:
+    - run__include_df
+    - run__df_delete_readyflows | bool
+  tags: df
+  cloudera.cloud.df_readyflow:
+    name: "{{ __df_readyflow_item.flow_name }}"
+    state: absent
+  loop: "{{ run__df_readyflows }}"
+  loop_control:
+    loop_var: __df_readyflow_item
+    label: "{{ __df_readyflow_item.flow_name }}"

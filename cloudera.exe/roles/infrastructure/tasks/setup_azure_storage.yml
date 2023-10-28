@@ -1,0 +1,122 @@
+---
+
+# Copyright 2023 Cloudera, Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: Request Azure Storage Account Creation with HNS
+  register: __infra_az_stor_acccount_test
+  ignore_errors: yes
+  azure.azcollection.azure_rm_resource:
+    state: present
+    resource_group: "{{ infra__azure_metagroup_name }}"
+    provider: Storage
+    resource_type: storageAccounts
+    resource_name: "{{ infra__azure_storage_name }}"
+    api_version: '2019-04-01'
+    idempotency: yes
+    body:
+      sku:
+        name: "{{ infra__azure_storage_class }}"
+      kind: "{{ infra__azure_storage_kind }}"
+      properties:
+        isHnsEnabled: yes
+      location:  "{{ infra__region }}"
+      tags: "{{ infra__tags }}"
+
+- name: Check Storage Account creation result for failure
+  when:
+    - __infra_az_stor_acccount_test.rc is defined
+    - __infra_az_stor_acccount_test.rc == 1
+  block:
+    - name: Test Azure Storage Account creation for StorageAccountAlreadyTaken
+      ansible.builtin.assert:
+        quiet: yes
+        that: '"StorageAccountAlreadyTaken" not in __infra_az_stor_acccount_test.module_stderr'
+        fail_msg: "Your proposed Storage Account Name {{ infra__azure_storage_name }} is already taken, please use another"
+
+    - name: Fail on any other Azure Storage Account Creation Error
+      ansible.builtin.assert:
+        quiet: yes
+        that: '"StorageAccountAlreadyTaken" in __infra_az_stor_acccount_test.module_stderr'
+        fail_msg: "Failed to Create Azure Storage Account with unanticipated error: {{ __infra_az_stor_acccount_test }}"
+
+- name: Wait for Azure Storage Account Creation
+  register: __azure_storage_account_info
+  until: __azure_storage_account_info.storageaccounts[0].provisioning_state == 'Succeeded'
+  retries: 20
+  delay: 5
+  azure.azcollection.azure_rm_storageaccount_info:
+    name: "{{ infra__azure_storage_name }}"
+    resource_group: "{{ infra__azure_metagroup_name }}"
+
+- name: Create Azure Storage Containers
+  loop_control:
+    loop_var: __azure_storcont_item
+  loop:
+    - "{{ infra__logs_path }}"
+    - "{{ infra__data_path }}"
+  azure.azcollection.azure_rm_storageblob:
+    resource_group: "{{ infra__azure_metagroup_name }}"
+    storage_account_name: "{{ infra__azure_storage_name }}"
+    container: "{{ __azure_storcont_item }}"
+    state: present
+
+- name: Handle Azure NetApp Storage if deploying CML
+  when:
+    - infra__ml_deploy
+    - infra__azure_netapp_nfs_mount is undefined or infra__azure_netapp_nfs_mount == ''
+  block:
+    - name: Handle Netapp Storage Account
+      netapp.azure.azure_rm_netapp_account:
+        resource_group: "{{ infra__azure_metagroup_name }}"
+        name: "{{ infra__azure_netapp_account_name }}"
+        state: present
+        location: "{{ infra__region }}"
+
+    - name: Handle NetApp Capacity Pool
+      netapp.azure.azure_rm_netapp_capacity_pool:
+        resource_group: "{{ infra__azure_metagroup_name }}"
+        account_name: "{{ infra__azure_netapp_account_name }}"
+        name: "{{ infra__azure_netapp_pool_name }}"
+        state: present
+        location: "{{ infra__region }}"
+        size: "{{ infra__azure_netapp_pool_size | int }}"
+        service_level: "{{ infra__azure_netapp_pool_type }}"
+
+    - name: Handle Azure NetApp Volume
+      register: __azure_netapp_vol_details
+      netapp.azure.azure_rm_netapp_volume:
+        resource_group: "{{ infra__azure_metagroup_name }}"
+        account_name: "{{ infra__azure_netapp_account_name }}"
+        pool_name: "{{ infra__azure_netapp_pool_name }}"
+        name: "{{ infra__azure_netapp_vol_name }}"
+        state: present
+        location: "{{ infra__region }}"
+        file_path: "{{ infra__namespace }}"
+        virtual_network: "{{ infra__vpc_name }}"
+        subnet_id: "{{ infra__vpc_svcnet_name }}"
+        service_level: "{{ infra__azure_netapp_vol_type }}"
+        size: "{{ infra__azure_netapp_vol_size }}"
+        protocol_types: "{{ ['NFSv' + infra__azure_netapp_nfs_version] }}"
+
+    - name: Prepare netapp vol info for submission during initial creation
+      when: __azure_netapp_vol_details.msg is defined
+      ansible.builtin.set_fact:
+        infra__azure_netapp_nfs_mount: "{{ __azure_netapp_vol_details.msg }}"
+
+    # Handle Azure (in-)consistency
+    - name: Prepare netapp vol info for submission during recreation
+      when: __azure_netapp_vol_details.mount_path is defined
+      ansible.builtin.set_fact:
+        infra__azure_netapp_nfs_mount: "{{ __azure_netapp_vol_details.mount_path }}"
