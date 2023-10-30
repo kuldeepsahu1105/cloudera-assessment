@@ -1,8 +1,2033 @@
+69 total
 
-[0m[1m[32mNo changes.[0m[1m No objects need to be destroyed.[0m
 
-[0mEither you have not created any objects yet or the existing objects were
-already deleted outside of Terraform.
-[0m[1m[32m
-Destroy complete! Resources: 0 destroyed.
-[0m
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[1]: Refreshing state... [id=rtbassoc-0eb190044ced66809]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[4]: Refreshing state... [id=rtbassoc-0a08d42721f65708c]
+module.ex01_minimal_inputs.data.aws_vpc.cdp_vpc: Read complete after 1s [id=vpc-0531cd4956f299457]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[2]: Refreshing state... [id=sgrule-2865790400]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[0]: Refreshing state... [id=sgrule-3824304530]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[1]: Refreshing state... [id=sgrule-4003501407]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[2]: Refreshing state... [id=sgrule-550465602]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[0]: Refreshing state... [id=sgrule-705475673]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[1]: Refreshing state... [id=sgrule-2577701172]
+module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env: Refreshing state... [id=crn:cdp:environments:us-west-1:d1a4553c-a799-432d-8e54-372cc2ab95f2:environment:9a6a6ae1-aa24-465e-aaeb-16a806d1e754]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_datalake_admin_role_instance_profile will be destroyed
+  - resource "aws_iam_instance_profile" "cdp_datalake_admin_role_instance_profile" {
+      - arn         = "arn:aws:iam::240356362593:instance-profile/kuldeep-cdpdemo-dladmin-role" -> null
+      - create_date = "2023-10-07T14:01:19Z" -> null
+      - id          = "kuldeep-cdpdemo-dladmin-role" -> null
+      - name        = "kuldeep-cdpdemo-dladmin-role" -> null
+      - path        = "/" -> null
+      - role        = "kuldeep-cdpdemo-dladmin-role" -> null
+      - tags        = {} -> null
+      - tags_all    = {} -> null
+      - unique_id   = "AIPATP5S3BFQVE56NKC4B" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_idbroker_role_instance_profile will be destroyed
+  - resource "aws_iam_instance_profile" "cdp_idbroker_role_instance_profile" {
+      - arn         = "arn:aws:iam::240356362593:instance-profile/kuldeep-cdpdemo-idbroker-role" -> null
+      - create_date = "2023-10-07T14:01:11Z" -> null
+      - id          = "kuldeep-cdpdemo-idbroker-role" -> null
+      - name        = "kuldeep-cdpdemo-idbroker-role" -> null
+      - path        = "/" -> null
+      - role        = "kuldeep-cdpdemo-idbroker-role" -> null
+      - tags        = {} -> null
+      - tags_all    = {} -> null
+      - unique_id   = "AIPATP5S3BFQQTRN6NACO" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_log_role_instance_profile will be destroyed
+  - resource "aws_iam_instance_profile" "cdp_log_role_instance_profile" {
+      - arn         = "arn:aws:iam::240356362593:instance-profile/kuldeep-cdpdemo-logs-role" -> null
+      - create_date = "2023-10-07T14:01:11Z" -> null
+      - id          = "kuldeep-cdpdemo-logs-role" -> null
+      - name        = "kuldeep-cdpdemo-logs-role" -> null
+      - path        = "/" -> null
+      - role        = "kuldeep-cdpdemo-logs-role" -> null
+      - tags        = {} -> null
+      - tags_all    = {} -> null
+      - unique_id   = "AIPATP5S3BFQ52WCTRPIX" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_ranger_audit_role_instance_profile will be destroyed
+  - resource "aws_iam_instance_profile" "cdp_ranger_audit_role_instance_profile" {
+      - arn         = "arn:aws:iam::240356362593:instance-profile/kuldeep-cdpdemo-audit-role" -> null
+      - create_date = "2023-10-07T14:01:19Z" -> null
+      - id          = "kuldeep-cdpdemo-audit-role" -> null
+      - name        = "kuldeep-cdpdemo-audit-role" -> null
+      - path        = "/" -> null
+      - role        = "kuldeep-cdpdemo-audit-role" -> null
+      - tags        = {} -> null
+      - tags_all    = {} -> null
+      - unique_id   = "AIPATP5S3BFQS6XQ66RQT" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_policy.cdp_bucket_data_access_policy will be destroyed
+  - resource "aws_iam_policy" "cdp_bucket_data_access_policy" {
+      - arn         = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-storage-policy" -> null
+      - description = "CDP Bucket S3 Access Policy for kuldeep-cdpdemo." -> null
+      - id          = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-storage-policy" -> null
+      - name        = "kuldeep-cdpdemo-storage-policy" -> null
+      - path        = "/" -> null
+      - policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = [
+                          - "s3:CreateJob",
+                          - "s3:GetAccountPublicAccessBlock",
+                          - "s3:ListJobs",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = "*"
+                    },
+                  - {
+                      - Action   = [
+                          - "s3:GetAccelerateConfiguration",
+                          - "s3:GetAnalyticsConfiguration",
+                          - "s3:GetBucketAcl",
+                          - "s3:GetBucketCORS",
+                          - "s3:GetBucketLocation",
+                          - "s3:GetBucketLogging",
+                          - "s3:GetBucketNotification",
+                          - "s3:GetBucketPolicy",
+                          - "s3:GetBucketPolicyStatus",
+                          - "s3:GetBucketPublicAccessBlock",
+                          - "s3:GetBucketRequestPayment",
+                          - "s3:GetBucketTagging",
+                          - "s3:GetBucketVersioning",
+                          - "s3:GetBucketWebsite",
+                          - "s3:GetEncryptionConfiguration",
+                          - "s3:GetInventoryConfiguration",
+                          - "s3:GetLifecycleConfiguration",
+                          - "s3:GetMetricsConfiguration",
+                          - "s3:GetObject",
+                          - "s3:GetObjectAcl",
+                          - "s3:GetObjectTagging",
+                          - "s3:GetObjectVersion",
+                          - "s3:GetObjectVersionAcl",
+                          - "s3:GetObjectVersionTagging",
+                          - "s3:GetReplicationConfiguration",
+                          - "s3:ListBucket",
+                          - "s3:ListBucketMultipartUploads",
+                          - "s3:ListMultipartUploadParts",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00",
+                          - "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00/*",
+                        ]
+                      - Sid      = "AllowListingOfDataLakeFolder"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - policy_id   = "ANPATP5S3BFQVOXDGST2B" -> null
+      - tags        = {
+          - "Name"         = "kuldeep-cdpdemo-storage-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all    = {
+          - "Name"         = "kuldeep-cdpdemo-storage-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_admin_s3_data_access_policy will be destroyed
+  - resource "aws_iam_policy" "cdp_datalake_admin_s3_data_access_policy" {
+      - arn         = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-dladmin-policy" -> null
+      - description = "CDP Datalake Admin S3 Access Policy for kuldeep-cdpdemo." -> null
+      - id          = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-dladmin-policy" -> null
+      - name        = "kuldeep-cdpdemo-dladmin-policy" -> null
+      - path        = "/" -> null
+      - policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = [
+                          - "s3:AbortMultipartUpload",
+                          - "s3:DeleteObject",
+                          - "s3:DeleteObjectVersion",
+                          - "s3:GetAccelerateConfiguration",
+                          - "s3:GetAnalyticsConfiguration",
+                          - "s3:GetBucketAcl",
+                          - "s3:GetBucketCORS",
+                          - "s3:GetBucketLocation",
+                          - "s3:GetBucketLogging",
+                          - "s3:GetBucketNotification",
+                          - "s3:GetBucketObjectLockConfiguration",
+                          - "s3:GetBucketPolicy",
+                          - "s3:GetBucketPolicyStatus",
+                          - "s3:GetBucketPublicAccessBlock",
+                          - "s3:GetBucketRequestPayment",
+                          - "s3:GetBucketTagging",
+                          - "s3:GetBucketVersioning",
+                          - "s3:GetBucketWebsite",
+                          - "s3:GetEncryptionConfiguration",
+                          - "s3:GetInventoryConfiguration",
+                          - "s3:GetLifecycleConfiguration",
+                          - "s3:GetMetricsConfiguration",
+                          - "s3:GetObject",
+                          - "s3:GetObjectAcl",
+                          - "s3:GetObjectLegalHold",
+                          - "s3:GetObjectRetention",
+                          - "s3:GetObjectTagging",
+                          - "s3:GetObjectVersion",
+                          - "s3:GetObjectVersionAcl",
+                          - "s3:GetObjectVersionTagging",
+                          - "s3:GetReplicationConfiguration",
+                          - "s3:ListBucket",
+                          - "s3:ListBucketMultipartUploads",
+                          - "s3:ListBucketVersions",
+                          - "s3:ListMultipartUploadParts",
+                          - "s3:PutObject",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00/data",
+                          - "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00/data/*",
+                        ]
+                      - Sid      = "VisualEditor3"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - policy_id   = "ANPATP5S3BFQ2ZCP376KN" -> null
+      - tags        = {
+          - "Name"         = "kuldeep-cdpdemo-dladmin-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all    = {
+          - "Name"         = "kuldeep-cdpdemo-dladmin-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_backup_policy will be destroyed
+  - resource "aws_iam_policy" "cdp_datalake_backup_policy" {
+      - arn         = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-backup-policy" -> null
+      - description = "CDP Datalake Backup Policy for kuldeep-cdpdemo." -> null
+      - id          = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-backup-policy" -> null
+      - name        = "kuldeep-cdpdemo-datalake-backup-policy" -> null
+      - path        = "/" -> null
+      - policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = [
+                          - "s3:PutObject",
+                          - "s3:GetObject",
+                          - "s3:DeleteObject",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00/*",
+                        ]
+                      - Sid      = "DatalakeBackupPermissions"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - policy_id   = "ANPATP5S3BFQ77XANVSPN" -> null
+      - tags        = {
+          - "Name"         = "kuldeep-cdpdemo-datalake-backup-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all    = {
+          - "Name"         = "kuldeep-cdpdemo-datalake-backup-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_restore_policy will be destroyed
+  - resource "aws_iam_policy" "cdp_datalake_restore_policy" {
+      - arn         = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-restore-policy" -> null
+      - description = "CDP Datalake Restore Policy for kuldeep-cdpdemo." -> null
+      - id          = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-restore-policy" -> null
+      - name        = "kuldeep-cdpdemo-datalake-restore-policy" -> null
+      - path        = "/" -> null
+      - policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = [
+                          - "s3:GetObject",
+                          - "s3:ListBucket",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00/*",
+                          - "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00",
+                        ]
+                      - Sid      = "DatalakeRestorePolicy"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - policy_id   = "ANPATP5S3BFQ3CFJL3TPZ" -> null
+      - tags        = {
+          - "Name"         = "kuldeep-cdpdemo-datalake-restore-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all    = {
+          - "Name"         = "kuldeep-cdpdemo-datalake-restore-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_policy.cdp_idbroker_policy will be destroyed
+  - resource "aws_iam_policy" "cdp_idbroker_policy" {
+      - arn         = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-idbroker-policy" -> null
+      - description = "CDP IDBroker Assume Role Policy for kuldeep-cdpdemo." -> null
+      - id          = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-idbroker-policy" -> null
+      - name        = "kuldeep-cdpdemo-idbroker-policy" -> null
+      - path        = "/" -> null
+      - policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = "sts:AssumeRole"
+                      - Effect   = "Allow"
+                      - Resource = "*"
+                      - Sid      = "VisualEditor0"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - policy_id   = "ANPATP5S3BFQUM32RQWRC" -> null
+      - tags        = {
+          - "Name"         = "kuldeep-cdpdemo-idbroker-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all    = {
+          - "Name"         = "kuldeep-cdpdemo-idbroker-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_policy.cdp_log_data_access_policy will be destroyed
+  - resource "aws_iam_policy" "cdp_log_data_access_policy" {
+      - arn         = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-logs-policy" -> null
+      - description = "CDP Log Location Access Policy for kuldeep-cdpdemo." -> null
+      - id          = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-logs-policy" -> null
+      - name        = "kuldeep-cdpdemo-logs-policy" -> null
+      - path        = "/" -> null
+      - policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = [
+                          - "s3:ListBucket",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00"
+                    },
+                  - {
+                      - Action   = [
+                          - "s3:AbortMultipartUpload",
+                          - "s3:ListMultipartUploadParts",
+                          - "s3:PutObject",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00/*"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - policy_id   = "ANPATP5S3BFQWF3OGFWPE" -> null
+      - tags        = {
+          - "Name"         = "kuldeep-cdpdemo-logs-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all    = {
+          - "Name"         = "kuldeep-cdpdemo-logs-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_policy.cdp_ranger_audit_s3_data_access_policy will be destroyed
+  - resource "aws_iam_policy" "cdp_ranger_audit_s3_data_access_policy" {
+      - arn         = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-audit-policy" -> null
+      - description = "CDP Ranger Audit S3 Access Policy for kuldeep-cdpdemo." -> null
+      - id          = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-audit-policy" -> null
+      - name        = "kuldeep-cdpdemo-audit-policy" -> null
+      - path        = "/" -> null
+      - policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = [
+                          - "s3:GetObject",
+                          - "s3:PutObject",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00/data/ranger/audit/*"
+                      - Sid      = "FullObjectAccessUnderAuditDir"
+                    },
+                  - {
+                      - Action   = [
+                          - "s3:AbortMultipartUpload",
+                          - "s3:ListBucket",
+                          - "s3:ListBucketMultipartUploads",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00"
+                      - Sid      = "LimitedAccessToDataLakeBucket"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - policy_id   = "ANPATP5S3BFQQBCW25ZZO" -> null
+      - tags        = {
+          - "Name"         = "kuldeep-cdpdemo-audit-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all    = {
+          - "Name"         = "kuldeep-cdpdemo-audit-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_policy.cdp_xaccount_policy will be destroyed
+  - resource "aws_iam_policy" "cdp_xaccount_policy" {
+      - arn         = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-xaccount-policy" -> null
+      - description = "CDP Cross-Account Policy for kuldeep-cdpdemo." -> null
+      - id          = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-xaccount-policy" -> null
+      - name        = "kuldeep-cdpdemo-xaccount-policy" -> null
+      - path        = "/" -> null
+      - policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = [
+                          - "cloudformation:*",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "CloudFormationFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "cloudwatch:PutMetricAlarm",
+                          - "cloudwatch:DeleteAlarms",
+                          - "cloudwatch:DescribeAlarms",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "CloudWatchMetric"
+                    },
+                  - {
+                      - Action   = [
+                          - "dynamodb:*",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "DynamoDBFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "logs:CreateLogGroup",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "LogsFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "logs:CreateLogStream",
+                          - "logs:DescribeLogStreams",
+                          - "logs:PutLogEvents",
+                          - "logs:PutRetentionPolicy",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:logs:*:*:log-group:/aws/eks/*:*",
+                        ]
+                      - Sid      = "LogsLimited"
+                    },
+                  - {
+                      - Action   = [
+                          - "eks:*",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "EnterpriseKubernetesServiceFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "pi:*",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:pi:*:*:metrics/rds/*",
+                        ]
+                      - Sid      = "PerformanceInsightsLimited"
+                    },
+                  - {
+                      - Action   = [
+                          - "elasticloadbalancing:*",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "ElasticLoadBalancingFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "rds:*",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "RelationalDatabaseServiceFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "route53:AssociateVPCWithHostedZone",
+                          - "route53:ChangeResourceRecordSets",
+                          - "route53:CreateHostedZone",
+                          - "route53:GetChange",
+                          - "route53:ListHostedZones",
+                          - "route53:ListHostedZonesByName",
+                          - "route53:ListResourceRecordSets",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "DomainNameServicesFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "acm:AddTagsToCertificate",
+                          - "acm:DeleteCertificate",
+                          - "acm:DescribeCertificate",
+                          - "acm:GetCertificate",
+                          - "acm:ListCertificates",
+                          - "acm:RenewCertificate",
+                          - "acm:RequestCertificate",
+                          - "acm:ListTagsForCertificate",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "CertificateManagerFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "s3:AbortMultipartUpload",
+                          - "s3:CreateBucket",
+                          - "s3:DeleteObject",
+                          - "s3:GetObject",
+                          - "s3:ListBucket",
+                          - "s3:GetBucketLocation",
+                          - "s3:PutObject",
+                          - "s3:DeleteBucket",
+                          - "s3:PutBucketPublicAccessBlock",
+                          - "s3:PutBucketTagging",
+                          - "s3:GetEncryptionConfiguration",
+                          - "s3:PutEncryptionConfiguration",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "SimpleStorageServiceFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "elasticfilesystem:*",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "ElasticFileSystemFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "ec2:*",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "ElasticComputeCloudFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "iam:AttachRolePolicy",
+                          - "iam:CreateInstanceProfile",
+                          - "iam:CreateRole",
+                          - "iam:DeleteInstanceProfile",
+                          - "iam:DeleteRole",
+                          - "iam:ListRolePolicies",
+                          - "iam:GetInstanceProfile",
+                          - "iam:GetRolePolicy",
+                          - "iam:ListAttachedRolePolicies",
+                          - "iam:ListInstanceProfiles",
+                          - "iam:PutRolePolicy",
+                          - "iam:PassRole",
+                          - "iam:GetRole",
+                          - "iam:AddRoleToInstanceProfile",
+                          - "iam:RemoveRoleFromInstanceProfile",
+                          - "iam:DetachRolePolicy",
+                          - "iam:DeleteRolePolicy",
+                          - "iam:SimulatePrincipalPolicy",
+                          - "iam:ListRoles",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "IdentityAccessManagementFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "iam:CreateServiceLinkedRole",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:iam::*:role/aws-service-role/*",
+                        ]
+                      - Sid      = "IdentityAccessManagementLimited"
+                    },
+                  - {
+                      - Action   = [
+                          - "autoscaling:*",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "AutoScalingFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "servicequotas:ListServiceQuotas",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "ServiceQuotas"
+                    },
+                  - {
+                      - Action   = [
+                          - "kms:CreateAlias",
+                          - "kms:CreateGrant",
+                          - "kms:CreateKey",
+                          - "kms:Decrypt",
+                          - "kms:EnableKeyRotation",
+                          - "kms:GenerateRandom",
+                          - "kms:ListKeys",
+                          - "kms:ListKeyPolicies",
+                          - "kms:DescribeKey",
+                          - "kms:ListAliases",
+                          - "kms:Encrypt",
+                          - "kms:TagResource",
+                          - "kms:DeleteAlias",
+                          - "kms:PutKeyPolicy",
+                          - "kms:ScheduleKeyDeletion",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "KeyManagementServiceFull"
+                    },
+                  - {
+                      - Action   = [
+                          - "ecr:DescribeRepositories",
+                          - "ecr:DescribeImages",
+                          - "ecr:GetAuthorizationToken",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "ECRAccessRead"
+                    },
+                  - {
+                      - Action   = [
+                          - "sts:DecodeAuthorizationMessage",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "DecodeAuthorizationMessage"
+                    },
+                  - {
+                      - Action   = [
+                          - "ssm:DescribeParameters",
+                          - "ssm:GetParameter",
+                          - "ssm:GetParameters",
+                          - "ssm:GetParameterHistory",
+                          - "ssm:GetParametersByPath",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:ssm:*:*:parameter/aws/service/eks/optimized-ami/*",
+                        ]
+                      - Sid      = "AllowSsmParams"
+                    },
+                  - {
+                      - Action   = [
+                          - "pricing:GetProducts",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "*",
+                        ]
+                      - Sid      = "PriceListService"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - policy_id   = "ANPATP5S3BFQ7ZLERFVZC" -> null
+      - tags        = {
+          - "Name"         = "kuldeep-cdpdemo-xaccount-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all    = {
+          - "Name"         = "kuldeep-cdpdemo-xaccount-policy"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role.cdp_datalake_admin_role will be destroyed
+  - resource "aws_iam_role" "cdp_datalake_admin_role" {
+      - arn                   = "arn:aws:iam::240356362593:role/kuldeep-cdpdemo-dladmin-role" -> null
+      - assume_role_policy    = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "sts:AssumeRole"
+                      - Effect    = "Allow"
+                      - Principal = {
+                          - AWS = "arn:aws:iam::240356362593:role/kuldeep-cdpdemo-idbroker-role"
+                        }
+                      - Sid       = ""
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - create_date           = "2023-10-07T14:01:19Z" -> null
+      - description           = "CDP Datalake Admin role for kuldeep-cdpdemo." -> null
+      - force_detach_policies = false -> null
+      - id                    = "kuldeep-cdpdemo-dladmin-role" -> null
+      - managed_policy_arns   = [
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-backup-policy",
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-restore-policy",
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-dladmin-policy",
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-storage-policy",
+        ] -> null
+      - max_session_duration  = 3600 -> null
+      - name                  = "kuldeep-cdpdemo-dladmin-role" -> null
+      - path                  = "/" -> null
+      - role_last_used        = [
+          - {
+              - last_used_date = ""
+              - region         = ""
+            },
+        ] -> null
+      - tags                  = {
+          - "Name"         = "kuldeep-cdpdemo-dladmin-role"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all              = {
+          - "Name"         = "kuldeep-cdpdemo-dladmin-role"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - unique_id             = "AROATP5S3BFQ3E4X7X2EB" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role.cdp_idbroker_role will be destroyed
+  - resource "aws_iam_role" "cdp_idbroker_role" {
+      - arn                   = "arn:aws:iam::240356362593:role/kuldeep-cdpdemo-idbroker-role" -> null
+      - assume_role_policy    = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "sts:AssumeRole"
+                      - Effect    = "Allow"
+                      - Principal = {
+                          - Service = "ec2.amazonaws.com"
+                        }
+                      - Sid       = ""
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - create_date           = "2023-10-07T14:01:11Z" -> null
+      - description           = "CDP IDBroker role for kuldeep-cdpdemo." -> null
+      - force_detach_policies = false -> null
+      - id                    = "kuldeep-cdpdemo-idbroker-role" -> null
+      - managed_policy_arns   = [
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-idbroker-policy",
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-logs-policy",
+        ] -> null
+      - max_session_duration  = 3600 -> null
+      - name                  = "kuldeep-cdpdemo-idbroker-role" -> null
+      - path                  = "/" -> null
+      - role_last_used        = [
+          - {
+              - last_used_date = ""
+              - region         = ""
+            },
+        ] -> null
+      - tags                  = {
+          - "Name"         = "kuldeep-cdpdemo-idbroker-role"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all              = {
+          - "Name"         = "kuldeep-cdpdemo-idbroker-role"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - unique_id             = "AROATP5S3BFQXHB3XU2TC" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role.cdp_log_role will be destroyed
+  - resource "aws_iam_role" "cdp_log_role" {
+      - arn                   = "arn:aws:iam::240356362593:role/kuldeep-cdpdemo-logs-role" -> null
+      - assume_role_policy    = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "sts:AssumeRole"
+                      - Effect    = "Allow"
+                      - Principal = {
+                          - Service = "ec2.amazonaws.com"
+                        }
+                      - Sid       = ""
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - create_date           = "2023-10-07T14:01:10Z" -> null
+      - description           = "CDP Log role for kuldeep-cdpdemo." -> null
+      - force_detach_policies = false -> null
+      - id                    = "kuldeep-cdpdemo-logs-role" -> null
+      - managed_policy_arns   = [
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-restore-policy",
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-logs-policy",
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-storage-policy",
+        ] -> null
+      - max_session_duration  = 3600 -> null
+      - name                  = "kuldeep-cdpdemo-logs-role" -> null
+      - path                  = "/" -> null
+      - role_last_used        = [
+          - {
+              - last_used_date = "2023-10-07T14:23:30Z"
+              - region         = "us-east-1"
+            },
+        ] -> null
+      - tags                  = {
+          - "Name"         = "kuldeep-cdpdemo-logs-role"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all              = {
+          - "Name"         = "kuldeep-cdpdemo-logs-role"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - unique_id             = "AROATP5S3BFQ5D2MIVW7D" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role.cdp_ranger_audit_role will be destroyed
+  - resource "aws_iam_role" "cdp_ranger_audit_role" {
+      - arn                   = "arn:aws:iam::240356362593:role/kuldeep-cdpdemo-audit-role" -> null
+      - assume_role_policy    = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "sts:AssumeRole"
+                      - Effect    = "Allow"
+                      - Principal = {
+                          - AWS = "arn:aws:iam::240356362593:role/kuldeep-cdpdemo-idbroker-role"
+                        }
+                      - Sid       = ""
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - create_date           = "2023-10-07T14:01:19Z" -> null
+      - description           = "CDP Ranger Audit role for kuldeep-cdpdemo" -> null
+      - force_detach_policies = false -> null
+      - id                    = "kuldeep-cdpdemo-audit-role" -> null
+      - managed_policy_arns   = [
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-audit-policy",
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-backup-policy",
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-restore-policy",
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-storage-policy",
+        ] -> null
+      - max_session_duration  = 3600 -> null
+      - name                  = "kuldeep-cdpdemo-audit-role" -> null
+      - path                  = "/" -> null
+      - role_last_used        = [
+          - {
+              - last_used_date = ""
+              - region         = ""
+            },
+        ] -> null
+      - tags                  = {
+          - "Name"         = "kuldeep-cdpdemo-audit-role"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all              = {
+          - "Name"         = "kuldeep-cdpdemo-audit-role"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - unique_id             = "AROATP5S3BFQRB6R3YNAB" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role.cdp_xaccount_role will be destroyed
+  - resource "aws_iam_role" "cdp_xaccount_role" {
+      - arn                   = "arn:aws:iam::240356362593:role/kuldeep-cdpdemo-xaccount-role" -> null
+      - assume_role_policy    = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "sts:AssumeRole"
+                      - Condition = {
+                          - StringEquals = {
+                              - "sts:ExternalId" = "9064e1c3-a080-4d87-91c4-5dc562214a38"
+                            }
+                        }
+                      - Effect    = "Allow"
+                      - Principal = {
+                          - AWS = "arn:aws:iam::387553343826:root"
+                        }
+                      - Sid       = ""
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - create_date           = "2023-10-07T14:01:10Z" -> null
+      - description           = "CDP Cross-Account role for kuldeep-cdpdemo." -> null
+      - force_detach_policies = false -> null
+      - id                    = "kuldeep-cdpdemo-xaccount-role" -> null
+      - managed_policy_arns   = [
+          - "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-xaccount-policy",
+        ] -> null
+      - max_session_duration  = 3600 -> null
+      - name                  = "kuldeep-cdpdemo-xaccount-role" -> null
+      - path                  = "/" -> null
+      - role_last_used        = [
+          - {
+              - last_used_date = "2023-10-07T14:17:02Z"
+              - region         = "us-east-1"
+            },
+        ] -> null
+      - tags                  = {
+          - "Name"         = "kuldeep-cdpdemo-xaccount-role"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all              = {
+          - "Name"         = "kuldeep-cdpdemo-xaccount-role"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - unique_id             = "AROATP5S3BFQWWHCRGBSE" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach1 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_datalake_admin_role_attach1" {
+      - id         = "kuldeep-cdpdemo-dladmin-role-20231007140119200900000007" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-dladmin-policy" -> null
+      - role       = "kuldeep-cdpdemo-dladmin-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach2 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_datalake_admin_role_attach2" {
+      - id         = "kuldeep-cdpdemo-dladmin-role-20231007140119225500000009" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-storage-policy" -> null
+      - role       = "kuldeep-cdpdemo-dladmin-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach3 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_datalake_admin_role_attach3" {
+      - id         = "kuldeep-cdpdemo-dladmin-role-20231007140119213700000008" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-backup-policy" -> null
+      - role       = "kuldeep-cdpdemo-dladmin-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach4 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_datalake_admin_role_attach4" {
+      - id         = "kuldeep-cdpdemo-dladmin-role-2023100714011922880000000a" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-restore-policy" -> null
+      - role       = "kuldeep-cdpdemo-dladmin-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_idbroker_role_attach1 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_idbroker_role_attach1" {
+      - id         = "kuldeep-cdpdemo-idbroker-role-20231007140111339400000006" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-idbroker-policy" -> null
+      - role       = "kuldeep-cdpdemo-idbroker-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_idbroker_role_attach2 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_idbroker_role_attach2" {
+      - id         = "kuldeep-cdpdemo-idbroker-role-20231007140111334200000005" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-logs-policy" -> null
+      - role       = "kuldeep-cdpdemo-idbroker-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach1 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_log_role_attach1" {
+      - id         = "kuldeep-cdpdemo-logs-role-20231007140111139000000001" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-logs-policy" -> null
+      - role       = "kuldeep-cdpdemo-logs-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach2 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_log_role_attach2" {
+      - id         = "kuldeep-cdpdemo-logs-role-20231007140111192900000004" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-storage-policy" -> null
+      - role       = "kuldeep-cdpdemo-logs-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach3 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_log_role_attach3" {
+      - id         = "kuldeep-cdpdemo-logs-role-20231007140111159600000002" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-restore-policy" -> null
+      - role       = "kuldeep-cdpdemo-logs-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach1 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_ranger_audit_role_attach1" {
+      - id         = "kuldeep-cdpdemo-audit-role-2023100714011924320000000b" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-audit-policy" -> null
+      - role       = "kuldeep-cdpdemo-audit-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach2 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_ranger_audit_role_attach2" {
+      - id         = "kuldeep-cdpdemo-audit-role-2023100714011930000000000e" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-storage-policy" -> null
+      - role       = "kuldeep-cdpdemo-audit-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach3 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_ranger_audit_role_attach3" {
+      - id         = "kuldeep-cdpdemo-audit-role-2023100714011929170000000d" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-backup-policy" -> null
+      - role       = "kuldeep-cdpdemo-audit-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach4 will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_ranger_audit_role_attach4" {
+      - id         = "kuldeep-cdpdemo-audit-role-2023100714011927080000000c" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-restore-policy" -> null
+      - role       = "kuldeep-cdpdemo-audit-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_xaccount_role_attach will be destroyed
+  - resource "aws_iam_role_policy_attachment" "cdp_xaccount_role_attach" {
+      - id         = "kuldeep-cdpdemo-xaccount-role-20231007140111189300000003" -> null
+      - policy_arn = "arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-xaccount-policy" -> null
+      - role       = "kuldeep-cdpdemo-xaccount-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_s3_bucket.cdp_storage_locations["kuldeep-cdpdemo-buk"] will be destroyed
+  - resource "aws_s3_bucket" "cdp_storage_locations" {
+      - arn                         = "arn:aws:s3:::kuldeep-cdpdemo-buk-6ee45e00" -> null
+      - bucket                      = "kuldeep-cdpdemo-buk-6ee45e00" -> null
+      - bucket_domain_name          = "kuldeep-cdpdemo-buk-6ee45e00.s3.amazonaws.com" -> null
+      - bucket_regional_domain_name = "kuldeep-cdpdemo-buk-6ee45e00.s3.amazonaws.com" -> null
+      - force_destroy               = true -> null
+      - hosted_zone_id              = "Z3AQBSTGFYJSTF" -> null
+      - id                          = "kuldeep-cdpdemo-buk-6ee45e00" -> null
+      - object_lock_enabled         = false -> null
+      - region                      = "us-east-1" -> null
+      - request_payer               = "BucketOwner" -> null
+      - tags                        = {
+          - "Name"         = "kuldeep-cdpdemo-buk-6ee45e00"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all                    = {
+          - "Name"         = "kuldeep-cdpdemo-buk-6ee45e00"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+
+      - grant {
+          - id          = "2fd0f609b30a064d9cd2bc6c2d9a1d83eb031e4e5bd2b171ac597775f983893f" -> null
+          - permissions = [
+              - "FULL_CONTROL",
+            ] -> null
+          - type        = "CanonicalUser" -> null
+        }
+
+      - server_side_encryption_configuration {
+          - rule {
+              - bucket_key_enabled = false -> null
+
+              - apply_server_side_encryption_by_default {
+                  - sse_algorithm = "AES256" -> null
+                }
+            }
+        }
+
+      - versioning {
+          - enabled    = false -> null
+          - mfa_delete = false -> null
+        }
+    }
+
+  # module.ex01_minimal_inputs.aws_s3_bucket_public_access_block.cdp_storage_locations["kuldeep-cdpdemo-buk"] will be destroyed
+  - resource "aws_s3_bucket_public_access_block" "cdp_storage_locations" {
+      - block_public_acls       = true -> null
+      - block_public_policy     = true -> null
+      - bucket                  = "kuldeep-cdpdemo-buk-6ee45e00" -> null
+      - id                      = "kuldeep-cdpdemo-buk-6ee45e00" -> null
+      - ignore_public_acls      = true -> null
+      - restrict_public_buckets = true -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_s3_object.cdp_backup_storage_object will be destroyed
+  - resource "aws_s3_object" "cdp_backup_storage_object" {
+      - acl                    = "private" -> null
+      - bucket                 = "kuldeep-cdpdemo-buk-6ee45e00" -> null
+      - bucket_key_enabled     = false -> null
+      - content_type           = "application/x-directory" -> null
+      - etag                   = "d41d8cd98f00b204e9800998ecf8427e" -> null
+      - force_destroy          = false -> null
+      - id                     = "backups/" -> null
+      - key                    = "backups/" -> null
+      - metadata               = {} -> null
+      - server_side_encryption = "AES256" -> null
+      - storage_class          = "STANDARD" -> null
+      - tags                   = {} -> null
+      - tags_all               = {} -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_s3_object.cdp_log_storage_object will be destroyed
+  - resource "aws_s3_object" "cdp_log_storage_object" {
+      - acl                    = "private" -> null
+      - bucket                 = "kuldeep-cdpdemo-buk-6ee45e00" -> null
+      - bucket_key_enabled     = false -> null
+      - content_type           = "application/x-directory" -> null
+      - etag                   = "d41d8cd98f00b204e9800998ecf8427e" -> null
+      - force_destroy          = false -> null
+      - id                     = "logs/" -> null
+      - key                    = "logs/" -> null
+      - metadata               = {} -> null
+      - server_side_encryption = "AES256" -> null
+      - storage_class          = "STANDARD" -> null
+      - tags                   = {} -> null
+      - tags_all               = {} -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group.cdp_default_sg will be destroyed
+  - resource "aws_security_group" "cdp_default_sg" {
+      - arn                    = "arn:aws:ec2:us-east-1:240356362593:security-group/sg-05a32b448631d665a" -> null
+      - description            = "kuldeep-cdpdemo-default-sg" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "Egress rule for default CDP security group."
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 0
+            },
+        ] -> null
+      - id                     = "sg-05a32b448631d665a" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/32",
+                ]
+              - description      = "Ingress rules for default CDP security group."
+              - from_port        = 22
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 22
+            },
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/32",
+                ]
+              - description      = "Ingress rules for default CDP security group."
+              - from_port        = 443
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 443
+            },
+          - {
+              - cidr_blocks      = [
+                  - "10.10.0.0/16",
+                ]
+              - description      = "Ingress rules for default CDP security group."
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 0
+            },
+          - {
+              - cidr_blocks      = []
+              - description      = "Self-reference ingress rule"
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = true
+              - to_port          = 0
+            },
+        ] -> null
+      - name                   = "kuldeep-cdpdemo-default-sg" -> null
+      - owner_id               = "240356362593" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name"         = "kuldeep-cdpdemo-default-sg"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all               = {
+          - "Name"         = "kuldeep-cdpdemo-default-sg"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - vpc_id                 = "vpc-0531cd4956f299457" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group.cdp_knox_sg will be destroyed
+  - resource "aws_security_group" "cdp_knox_sg" {
+      - arn                    = "arn:aws:ec2:us-east-1:240356362593:security-group/sg-0f4ca08d4a381fe15" -> null
+      - description            = "kuldeep-cdpdemo-knox-sg" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "Egress rule for Knox CDP security group."
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 0
+            },
+        ] -> null
+      - id                     = "sg-0f4ca08d4a381fe15" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/32",
+                ]
+              - description      = "Ingress rule for Knox CDP security group."
+              - from_port        = 22
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 22
+            },
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/32",
+                ]
+              - description      = "Ingress rule for Knox CDP security group."
+              - from_port        = 443
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 443
+            },
+          - {
+              - cidr_blocks      = [
+                  - "10.10.0.0/16",
+                ]
+              - description      = "Ingress rule for Knox CDP security group."
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 0
+            },
+          - {
+              - cidr_blocks      = []
+              - description      = "Self-reference ingress rule."
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = true
+              - to_port          = 0
+            },
+        ] -> null
+      - name                   = "kuldeep-cdpdemo-knox-sg" -> null
+      - owner_id               = "240356362593" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name"         = "kuldeep-cdpdemo-knox-sg"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all               = {
+          - "Name"         = "kuldeep-cdpdemo-knox-sg"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - vpc_id                 = "vpc-0531cd4956f299457" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_egress will be destroyed
+  - resource "aws_security_group_rule" "cdp_default_sg_egress" {
+      - cidr_blocks            = [
+          - "0.0.0.0/0",
+        ] -> null
+      - description            = "Egress rule for default CDP security group." -> null
+      - from_port              = 0 -> null
+      - id                     = "sgrule-2648826644" -> null
+      - protocol               = "-1" -> null
+      - security_group_id      = "sg-05a32b448631d665a" -> null
+      - security_group_rule_id = "sgr-04aacbb87a5091d0c" -> null
+      - self                   = false -> null
+      - to_port                = 0 -> null
+      - type                   = "egress" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[0] will be destroyed
+  - resource "aws_security_group_rule" "cdp_default_sg_ingress" {
+      - cidr_blocks            = [
+          - "10.10.0.0/16",
+        ] -> null
+      - description            = "Ingress rules for default CDP security group." -> null
+      - from_port              = 0 -> null
+      - id                     = "sgrule-3824304530" -> null
+      - protocol               = "-1" -> null
+      - security_group_id      = "sg-05a32b448631d665a" -> null
+      - security_group_rule_id = "sgr-042c775ee092727f2" -> null
+      - self                   = false -> null
+      - to_port                = 0 -> null
+      - type                   = "ingress" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[1] will be destroyed
+  - resource "aws_security_group_rule" "cdp_default_sg_ingress" {
+      - cidr_blocks            = [
+          - "0.0.0.0/32",
+        ] -> null
+      - description            = "Ingress rules for default CDP security group." -> null
+      - from_port              = 443 -> null
+      - id                     = "sgrule-4003501407" -> null
+      - protocol               = "tcp" -> null
+      - security_group_id      = "sg-05a32b448631d665a" -> null
+      - security_group_rule_id = "sgr-00b41f210277453b1" -> null
+      - self                   = false -> null
+      - to_port                = 443 -> null
+      - type                   = "ingress" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[2] will be destroyed
+  - resource "aws_security_group_rule" "cdp_default_sg_ingress" {
+      - cidr_blocks            = [
+          - "0.0.0.0/32",
+        ] -> null
+      - description            = "Ingress rules for default CDP security group." -> null
+      - from_port              = 22 -> null
+      - id                     = "sgrule-2865790400" -> null
+      - protocol               = "tcp" -> null
+      - security_group_id      = "sg-05a32b448631d665a" -> null
+      - security_group_rule_id = "sgr-0da35a8f0c624f4cf" -> null
+      - self                   = false -> null
+      - to_port                = 22 -> null
+      - type                   = "ingress" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress_self will be destroyed
+  - resource "aws_security_group_rule" "cdp_default_sg_ingress_self" {
+      - description            = "Self-reference ingress rule" -> null
+      - from_port              = 0 -> null
+      - id                     = "sgrule-805258364" -> null
+      - protocol               = "-1" -> null
+      - security_group_id      = "sg-05a32b448631d665a" -> null
+      - security_group_rule_id = "sgr-04805f02bba3df4b6" -> null
+      - self                   = true -> null
+      - to_port                = 0 -> null
+      - type                   = "ingress" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_egress will be destroyed
+  - resource "aws_security_group_rule" "cdp_knox_sg_egress" {
+      - cidr_blocks            = [
+          - "0.0.0.0/0",
+        ] -> null
+      - description            = "Egress rule for Knox CDP security group." -> null
+      - from_port              = 0 -> null
+      - id                     = "sgrule-4078623108" -> null
+      - protocol               = "-1" -> null
+      - security_group_id      = "sg-0f4ca08d4a381fe15" -> null
+      - security_group_rule_id = "sgr-096d499382b832dd3" -> null
+      - self                   = false -> null
+      - to_port                = 0 -> null
+      - type                   = "egress" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[0] will be destroyed
+  - resource "aws_security_group_rule" "cdp_knox_sg_ingress" {
+      - cidr_blocks            = [
+          - "10.10.0.0/16",
+        ] -> null
+      - description            = "Ingress rule for Knox CDP security group." -> null
+      - from_port              = 0 -> null
+      - id                     = "sgrule-705475673" -> null
+      - protocol               = "-1" -> null
+      - security_group_id      = "sg-0f4ca08d4a381fe15" -> null
+      - security_group_rule_id = "sgr-034d252ddcebc9869" -> null
+      - self                   = false -> null
+      - to_port                = 0 -> null
+      - type                   = "ingress" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[1] will be destroyed
+  - resource "aws_security_group_rule" "cdp_knox_sg_ingress" {
+      - cidr_blocks            = [
+          - "0.0.0.0/32",
+        ] -> null
+      - description            = "Ingress rule for Knox CDP security group." -> null
+      - from_port              = 443 -> null
+      - id                     = "sgrule-2577701172" -> null
+      - protocol               = "tcp" -> null
+      - security_group_id      = "sg-0f4ca08d4a381fe15" -> null
+      - security_group_rule_id = "sgr-079f7ba29f75d9fb0" -> null
+      - self                   = false -> null
+      - to_port                = 443 -> null
+      - type                   = "ingress" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[2] will be destroyed
+  - resource "aws_security_group_rule" "cdp_knox_sg_ingress" {
+      - cidr_blocks            = [
+          - "0.0.0.0/32",
+        ] -> null
+      - description            = "Ingress rule for Knox CDP security group." -> null
+      - from_port              = 22 -> null
+      - id                     = "sgrule-550465602" -> null
+      - protocol               = "tcp" -> null
+      - security_group_id      = "sg-0f4ca08d4a381fe15" -> null
+      - security_group_rule_id = "sgr-0cbb04b69a37e53fa" -> null
+      - self                   = false -> null
+      - to_port                = 22 -> null
+      - type                   = "ingress" -> null
+    }
+
+  # module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress_self will be destroyed
+  - resource "aws_security_group_rule" "cdp_knox_sg_ingress_self" {
+      - description            = "Self-reference ingress rule." -> null
+      - from_port              = 0 -> null
+      - id                     = "sgrule-4292016338" -> null
+      - protocol               = "-1" -> null
+      - security_group_id      = "sg-0f4ca08d4a381fe15" -> null
+      - security_group_rule_id = "sgr-03ad67862ffbc3872" -> null
+      - self                   = true -> null
+      - to_port                = 0 -> null
+      - type                   = "ingress" -> null
+    }
+
+  # module.ex01_minimal_inputs.cdp_environments_aws_credential.cdp_cred will be destroyed
+  - resource "cdp_environments_aws_credential" "cdp_cred" {
+      - credential_name = "kuldeep-cdpdemo-xaccount-cred" -> null
+      - crn             = "crn:cdp:environments:us-west-1:d1a4553c-a799-432d-8e54-372cc2ab95f2:credential:03b7893e-6ec9-460e-b716-ce46b8681ec2" -> null
+      - description     = "AWS Cross Account Credential for AWS env kuldeep-cdpdemo-cdp-env" -> null
+      - id              = "crn:cdp:environments:us-west-1:d1a4553c-a799-432d-8e54-372cc2ab95f2:credential:03b7893e-6ec9-460e-b716-ce46b8681ec2" -> null
+      - role_arn        = "arn:aws:iam::240356362593:role/kuldeep-cdpdemo-xaccount-role" -> null
+    }
+
+  # module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env will be destroyed
+  - resource "cdp_environments_aws_environment" "cdp_env" {
+      - authentication                     = {
+          - public_key_id = "cdpdemo" -> null
+        } -> null
+      - create_private_subnets             = false -> null
+      - create_service_endpoints           = false -> null
+      - credential_name                    = "kuldeep-cdpdemo-xaccount-cred" -> null
+      - crn                                = "crn:cdp:environments:us-west-1:d1a4553c-a799-432d-8e54-372cc2ab95f2:environment:9a6a6ae1-aa24-465e-aaeb-16a806d1e754" -> null
+      - enable_tunnel                      = true -> null
+      - endpoint_access_gateway_scheme     = "PRIVATE" -> null
+      - endpoint_access_gateway_subnet_ids = [
+          - "subnet-038e122570392ead5",
+          - "subnet-04c8d0a133ef3c679",
+          - "subnet-083899209124c4ff1",
+          - "subnet-0b4c196e5d289c9a0",
+          - "subnet-0d34d8a526da15741",
+        ] -> null
+      - environment_name                   = "kuldeep-cdpdemo-cdp-env" -> null
+      - freeipa                            = {
+          - instance_count_by_group = 3 -> null
+          - multi_az                = true -> null
+        } -> null
+      - id                                 = "crn:cdp:environments:us-west-1:d1a4553c-a799-432d-8e54-372cc2ab95f2:environment:9a6a6ae1-aa24-465e-aaeb-16a806d1e754" -> null
+      - log_storage                        = {
+          - backup_storage_location_base = "s3a://kuldeep-cdpdemo-buk-6ee45e00/backups/" -> null
+          - instance_profile             = "arn:aws:iam::240356362593:instance-profile/kuldeep-cdpdemo-logs-role" -> null
+          - storage_location_base        = "s3a://kuldeep-cdpdemo-buk-6ee45e00/logs/" -> null
+        } -> null
+      - network_cidr                       = "10.10.0.0/16" -> null
+      - region                             = "us-east-1" -> null
+      - report_deployment_logs             = false -> null
+      - security_access                    = {
+          - cidr                       = "" -> null
+          - default_security_group_id  = "sg-05a32b448631d665a" -> null
+          - security_group_id_for_knox = "sg-0f4ca08d4a381fe15" -> null
+        } -> null
+      - status                             = "AVAILABLE" -> null
+      - subnet_ids                         = [
+          - "subnet-038e122570392ead5",
+          - "subnet-04c8d0a133ef3c679",
+          - "subnet-083899209124c4ff1",
+          - "subnet-0b4c196e5d289c9a0",
+          - "subnet-0d34d8a526da15741",
+        ] -> null
+      - tags                               = {
+          - "Cloudera-Creator-Resource-Name"     = "crn:altus:iam:us-west-1:d1a4553c-a799-432d-8e54-372cc2ab95f2:user:40fc3452-1196-4392-915a-45314848ede7"
+          - "Cloudera-Environment-Resource-Name" = "crn:cdp:environments:us-west-1:d1a4553c-a799-432d-8e54-372cc2ab95f2:environment:9a6a6ae1-aa24-465e-aaeb-16a806d1e754"
+          - "Cloudera-Resource-Name"             = "crn:cdp:environments:us-west-1:d1a4553c-a799-432d-8e54-372cc2ab95f2:environment:9a6a6ae1-aa24-465e-aaeb-16a806d1e754"
+        } -> null
+      - tunnel_type                        = "CCMV2_JUMPGATE" -> null
+      - vpc_id                             = "vpc-0531cd4956f299457" -> null
+      - workload_analytics                 = true -> null
+    }
+
+  # module.ex01_minimal_inputs.random_id.bucket_suffix[0] will be destroyed
+  - resource "random_id" "bucket_suffix" {
+      - b64_std     = "buReAA==" -> null
+      - b64_url     = "buReAA" -> null
+      - byte_length = 4 -> null
+      - dec         = "1860460032" -> null
+      - hex         = "6ee45e00" -> null
+      - id          = "buReAA" -> null
+    }
+
+  # module.ex01_minimal_inputs.time_sleep.iam_propagation will be destroyed
+  - resource "time_sleep" "iam_propagation" {
+      - create_duration = "45s" -> null
+      - id              = "2023-10-07T14:01:56Z" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_internet_gateway.this[0] will be destroyed
+  - resource "aws_internet_gateway" "this" {
+      - arn      = "arn:aws:ec2:us-east-1:240356362593:internet-gateway/igw-0d0733c03e675b36a" -> null
+      - id       = "igw-0d0733c03e675b36a" -> null
+      - owner_id = "240356362593" -> null
+      - tags     = {
+          - "Name"         = "kuldeep-cdpdemo-net"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all = {
+          - "Name"         = "kuldeep-cdpdemo-net"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - vpc_id   = "vpc-0531cd4956f299457" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route.public_internet_gateway[0] will be destroyed
+  - resource "aws_route" "public_internet_gateway" {
+      - destination_cidr_block = "0.0.0.0/0" -> null
+      - gateway_id             = "igw-0d0733c03e675b36a" -> null
+      - id                     = "r-rtb-0e5cbaf963ebc4bb01080289494" -> null
+      - origin                 = "CreateRoute" -> null
+      - route_table_id         = "rtb-0e5cbaf963ebc4bb0" -> null
+      - state                  = "active" -> null
+
+      - timeouts {
+          - create = "5m" -> null
+        }
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table.public[0] will be destroyed
+  - resource "aws_route_table" "public" {
+      - arn              = "arn:aws:ec2:us-east-1:240356362593:route-table/rtb-0e5cbaf963ebc4bb0" -> null
+      - id               = "rtb-0e5cbaf963ebc4bb0" -> null
+      - owner_id         = "240356362593" -> null
+      - propagating_vgws = [] -> null
+      - route            = [
+          - {
+              - carrier_gateway_id         = ""
+              - cidr_block                 = "0.0.0.0/0"
+              - core_network_arn           = ""
+              - destination_prefix_list_id = ""
+              - egress_only_gateway_id     = ""
+              - gateway_id                 = "igw-0d0733c03e675b36a"
+              - instance_id                = ""
+              - ipv6_cidr_block            = ""
+              - local_gateway_id           = ""
+              - nat_gateway_id             = ""
+              - network_interface_id       = ""
+              - transit_gateway_id         = ""
+              - vpc_endpoint_id            = ""
+              - vpc_peering_connection_id  = ""
+            },
+        ] -> null
+      - tags             = {
+          - "Name"         = "kuldeep-cdpdemo-net-public"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all         = {
+          - "Name"         = "kuldeep-cdpdemo-net-public"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - vpc_id           = "vpc-0531cd4956f299457" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[0] will be destroyed
+  - resource "aws_route_table_association" "public" {
+      - id             = "rtbassoc-0fd179753e7d7f7ab" -> null
+      - route_table_id = "rtb-0e5cbaf963ebc4bb0" -> null
+      - subnet_id      = "subnet-04c8d0a133ef3c679" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[1] will be destroyed
+  - resource "aws_route_table_association" "public" {
+      - id             = "rtbassoc-0eb190044ced66809" -> null
+      - route_table_id = "rtb-0e5cbaf963ebc4bb0" -> null
+      - subnet_id      = "subnet-083899209124c4ff1" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[2] will be destroyed
+  - resource "aws_route_table_association" "public" {
+      - id             = "rtbassoc-0f69fb3967105949e" -> null
+      - route_table_id = "rtb-0e5cbaf963ebc4bb0" -> null
+      - subnet_id      = "subnet-0d34d8a526da15741" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[3] will be destroyed
+  - resource "aws_route_table_association" "public" {
+      - id             = "rtbassoc-08cb5fa23b369969a" -> null
+      - route_table_id = "rtb-0e5cbaf963ebc4bb0" -> null
+      - subnet_id      = "subnet-0b4c196e5d289c9a0" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[4] will be destroyed
+  - resource "aws_route_table_association" "public" {
+      - id             = "rtbassoc-0a08d42721f65708c" -> null
+      - route_table_id = "rtb-0e5cbaf963ebc4bb0" -> null
+      - subnet_id      = "subnet-038e122570392ead5" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[0] will be destroyed
+  - resource "aws_subnet" "public" {
+      - arn                                            = "arn:aws:ec2:us-east-1:240356362593:subnet/subnet-04c8d0a133ef3c679" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az1" -> null
+      - cidr_block                                     = "10.10.0.0/19" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-04c8d0a133ef3c679" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = true -> null
+      - owner_id                                       = "240356362593" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name"                   = "kuldeep-cdpdemo-net-public-us-east-1a"
+          - "agent_source"           = "tf-cdp-module"
+          - "env_prefix"             = "kuldeep-cdpdemo"
+          - "kubernetes.io/role/elb" = "1"
+        } -> null
+      - tags_all                                       = {
+          - "Name"                   = "kuldeep-cdpdemo-net-public-us-east-1a"
+          - "agent_source"           = "tf-cdp-module"
+          - "env_prefix"             = "kuldeep-cdpdemo"
+          - "kubernetes.io/role/elb" = "1"
+        } -> null
+      - vpc_id                                         = "vpc-0531cd4956f299457" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[1] will be destroyed
+  - resource "aws_subnet" "public" {
+      - arn                                            = "arn:aws:ec2:us-east-1:240356362593:subnet/subnet-083899209124c4ff1" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1b" -> null
+      - availability_zone_id                           = "use1-az2" -> null
+      - cidr_block                                     = "10.10.32.0/19" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-083899209124c4ff1" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = true -> null
+      - owner_id                                       = "240356362593" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name"                   = "kuldeep-cdpdemo-net-public-us-east-1b"
+          - "agent_source"           = "tf-cdp-module"
+          - "env_prefix"             = "kuldeep-cdpdemo"
+          - "kubernetes.io/role/elb" = "1"
+        } -> null
+      - tags_all                                       = {
+          - "Name"                   = "kuldeep-cdpdemo-net-public-us-east-1b"
+          - "agent_source"           = "tf-cdp-module"
+          - "env_prefix"             = "kuldeep-cdpdemo"
+          - "kubernetes.io/role/elb" = "1"
+        } -> null
+      - vpc_id                                         = "vpc-0531cd4956f299457" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[2] will be destroyed
+  - resource "aws_subnet" "public" {
+      - arn                                            = "arn:aws:ec2:us-east-1:240356362593:subnet/subnet-0d34d8a526da15741" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1c" -> null
+      - availability_zone_id                           = "use1-az4" -> null
+      - cidr_block                                     = "10.10.64.0/19" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-0d34d8a526da15741" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = true -> null
+      - owner_id                                       = "240356362593" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name"                   = "kuldeep-cdpdemo-net-public-us-east-1c"
+          - "agent_source"           = "tf-cdp-module"
+          - "env_prefix"             = "kuldeep-cdpdemo"
+          - "kubernetes.io/role/elb" = "1"
+        } -> null
+      - tags_all                                       = {
+          - "Name"                   = "kuldeep-cdpdemo-net-public-us-east-1c"
+          - "agent_source"           = "tf-cdp-module"
+          - "env_prefix"             = "kuldeep-cdpdemo"
+          - "kubernetes.io/role/elb" = "1"
+        } -> null
+      - vpc_id                                         = "vpc-0531cd4956f299457" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[3] will be destroyed
+  - resource "aws_subnet" "public" {
+      - arn                                            = "arn:aws:ec2:us-east-1:240356362593:subnet/subnet-0b4c196e5d289c9a0" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1d" -> null
+      - availability_zone_id                           = "use1-az6" -> null
+      - cidr_block                                     = "10.10.96.0/19" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-0b4c196e5d289c9a0" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = true -> null
+      - owner_id                                       = "240356362593" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name"                   = "kuldeep-cdpdemo-net-public-us-east-1d"
+          - "agent_source"           = "tf-cdp-module"
+          - "env_prefix"             = "kuldeep-cdpdemo"
+          - "kubernetes.io/role/elb" = "1"
+        } -> null
+      - tags_all                                       = {
+          - "Name"                   = "kuldeep-cdpdemo-net-public-us-east-1d"
+          - "agent_source"           = "tf-cdp-module"
+          - "env_prefix"             = "kuldeep-cdpdemo"
+          - "kubernetes.io/role/elb" = "1"
+        } -> null
+      - vpc_id                                         = "vpc-0531cd4956f299457" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[4] will be destroyed
+  - resource "aws_subnet" "public" {
+      - arn                                            = "arn:aws:ec2:us-east-1:240356362593:subnet/subnet-038e122570392ead5" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1f" -> null
+      - availability_zone_id                           = "use1-az5" -> null
+      - cidr_block                                     = "10.10.128.0/19" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-038e122570392ead5" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = true -> null
+      - owner_id                                       = "240356362593" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name"                   = "kuldeep-cdpdemo-net-public-us-east-1f"
+          - "agent_source"           = "tf-cdp-module"
+          - "env_prefix"             = "kuldeep-cdpdemo"
+          - "kubernetes.io/role/elb" = "1"
+        } -> null
+      - tags_all                                       = {
+          - "Name"                   = "kuldeep-cdpdemo-net-public-us-east-1f"
+          - "agent_source"           = "tf-cdp-module"
+          - "env_prefix"             = "kuldeep-cdpdemo"
+          - "kubernetes.io/role/elb" = "1"
+        } -> null
+      - vpc_id                                         = "vpc-0531cd4956f299457" -> null
+    }
+
+  # module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_vpc.this[0] will be destroyed
+  - resource "aws_vpc" "this" {
+      - arn                                  = "arn:aws:ec2:us-east-1:240356362593:vpc/vpc-0531cd4956f299457" -> null
+      - assign_generated_ipv6_cidr_block     = false -> null
+      - cidr_block                           = "10.10.0.0/16" -> null
+      - default_network_acl_id               = "acl-013b4bf1dcc1d4350" -> null
+      - default_route_table_id               = "rtb-0c892a8933148dc2b" -> null
+      - default_security_group_id            = "sg-0ddccee5ee42717fe" -> null
+      - dhcp_options_id                      = "dopt-0749c838cd241bb77" -> null
+      - enable_classiclink                   = false -> null
+      - enable_classiclink_dns_support       = false -> null
+      - enable_dns_hostnames                 = true -> null
+      - enable_dns_support                   = true -> null
+      - enable_network_address_usage_metrics = false -> null
+      - id                                   = "vpc-0531cd4956f299457" -> null
+      - instance_tenancy                     = "default" -> null
+      - ipv6_netmask_length                  = 0 -> null
+      - main_route_table_id                  = "rtb-0c892a8933148dc2b" -> null
+      - owner_id                             = "240356362593" -> null
+      - tags                                 = {
+          - "Name"         = "kuldeep-cdpdemo-net"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+      - tags_all                             = {
+          - "Name"         = "kuldeep-cdpdemo-net"
+          - "agent_source" = "tf-cdp-module"
+          - "env_prefix"   = "kuldeep-cdpdemo"
+        } -> null
+    }
+
+Plan: 0 to add, 0 to change, 65 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env: Destroying... [id=crn:cdp:environments:us-west-1:d1a4553c-a799-432d-8e54-372cc2ab95f2:environment:9a6a6ae1-aa24-465e-aaeb-16a806d1e754]
+module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env: Still destroying... [id=crn:cdp:environments:us-west-1:d1a4553c...t:9a6a6ae1-aa24-465e-aaeb-16a806d1e754, 10s elapsed]
+module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env: Still destroying... [id=crn:cdp:environments:us-west-1:d1a4553c...t:9a6a6ae1-aa24-465e-aaeb-16a806d1e754, 20s elapsed]
+module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env: Still destroying... [id=crn:cdp:environments:us-west-1:d1a4553c...t:9a6a6ae1-aa24-465e-aaeb-16a806d1e754, 30s elapsed]
+module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env: Still destroying... [id=crn:cdp:environments:us-west-1:d1a4553c...t:9a6a6ae1-aa24-465e-aaeb-16a806d1e754, 40s elapsed]
+module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env: Still destroying... [id=crn:cdp:environments:us-west-1:d1a4553c...t:9a6a6ae1-aa24-465e-aaeb-16a806d1e754, 50s elapsed]
+module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env: Still destroying... [id=crn:cdp:environments:us-west-1:d1a4553c...t:9a6a6ae1-aa24-465e-aaeb-16a806d1e754, 1m0s elapsed]
+module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env: Still destroying... [id=crn:cdp:environments:us-west-1:d1a4553c...t:9a6a6ae1-aa24-465e-aaeb-16a806d1e754, 1m10s elapsed]
+module.ex01_minimal_inputs.cdp_environments_aws_environment.cdp_env: Destruction complete after 1m19s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[2]: Destroying... [id=rtbassoc-0f69fb3967105949e]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[3]: Destroying... [id=rtbassoc-08cb5fa23b369969a]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach3: Destroying... [id=kuldeep-cdpdemo-audit-role-2023100714011929170000000d]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach2: Destroying... [id=kuldeep-cdpdemo-audit-role-2023100714011930000000000e]
+module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_ranger_audit_role_instance_profile: Destroying... [id=kuldeep-cdpdemo-audit-role]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress_self: Destroying... [id=sgrule-4292016338]
+module.ex01_minimal_inputs.aws_s3_bucket_public_access_block.cdp_storage_locations["kuldeep-cdpdemo-buk"]: Destroying... [id=kuldeep-cdpdemo-buk-6ee45e00]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_idbroker_role_attach2: Destroying... [id=kuldeep-cdpdemo-idbroker-role-20231007140111334200000005]
+module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_idbroker_role_instance_profile: Destroying... [id=kuldeep-cdpdemo-idbroker-role]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[0]: Destroying... [id=sgrule-3824304530]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach3: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_idbroker_role_attach2: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_s3_bucket_public_access_block.cdp_storage_locations["kuldeep-cdpdemo-buk"]: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach2: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_log_role_instance_profile: Destroying... [id=kuldeep-cdpdemo-logs-role]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress_self: Destroying... [id=sgrule-805258364]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach2: Destroying... [id=kuldeep-cdpdemo-dladmin-role-20231007140119225500000009]
+module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_idbroker_role_instance_profile: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_ranger_audit_role_instance_profile: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[0]: Destroying... [id=sgrule-705475673]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach2: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach3: Destroying... [id=kuldeep-cdpdemo-logs-role-20231007140111159600000002]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[2]: Destroying... [id=sgrule-550465602]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_egress: Destroying... [id=sgrule-4078623108]
+module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_log_role_instance_profile: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach3: Destruction complete after 0s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route.public_internet_gateway[0]: Destroying... [id=r-rtb-0e5cbaf963ebc4bb01080289494]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[4]: Destroying... [id=rtbassoc-0a08d42721f65708c]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[3]: Destruction complete after 0s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[2]: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_s3_object.cdp_log_storage_object: Destroying... [id=logs/]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[1]: Destroying... [id=sgrule-4003501407]
+module.ex01_minimal_inputs.aws_s3_object.cdp_log_storage_object: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[2]: Destroying... [id=sgrule-2865790400]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[0]: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress_self: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_xaccount_role_attach: Destroying... [id=kuldeep-cdpdemo-xaccount-role-20231007140111189300000003]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[4]: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach1: Destroying... [id=kuldeep-cdpdemo-dladmin-role-20231007140119200900000007]
+module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_datalake_admin_role_instance_profile: Destroying... [id=kuldeep-cdpdemo-dladmin-role]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_xaccount_role_attach: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach1: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_s3_object.cdp_backup_storage_object: Destroying... [id=backups/]
+module.ex01_minimal_inputs.cdp_environments_aws_credential.cdp_cred: Destroying... [id=crn:cdp:environments:us-west-1:d1a4553c-a799-432d-8e54-372cc2ab95f2:credential:03b7893e-6ec9-460e-b716-ce46b8681ec2]
+module.ex01_minimal_inputs.aws_s3_object.cdp_backup_storage_object: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_instance_profile.cdp_datalake_admin_role_instance_profile: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach4: Destroying... [id=kuldeep-cdpdemo-audit-role-2023100714011927080000000c]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach1: Destroying... [id=kuldeep-cdpdemo-logs-role-20231007140111139000000001]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach4: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach1: Destruction complete after 0s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route.public_internet_gateway[0]: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_idbroker_role_attach1: Destroying... [id=kuldeep-cdpdemo-idbroker-role-20231007140111339400000006]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[0]: Destroying... [id=rtbassoc-0fd179753e7d7f7ab]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[1]: Destroying... [id=rtbassoc-0eb190044ced66809]
+module.ex01_minimal_inputs.cdp_environments_aws_credential.cdp_cred: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_idbroker_role_attach1: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach3: Destroying... [id=kuldeep-cdpdemo-dladmin-role-20231007140119213700000008]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_egress: Destroying... [id=sgrule-2648826644]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[0]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach1: Destroying... [id=kuldeep-cdpdemo-audit-role-2023100714011924320000000b]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach3: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach2: Destroying... [id=kuldeep-cdpdemo-logs-role-20231007140111192900000004]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress_self: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_ranger_audit_role_attach1: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach4: Destroying... [id=kuldeep-cdpdemo-dladmin-role-2023100714011922880000000a]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[1]: Destroying... [id=sgrule-2577701172]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_log_role_attach2: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_policy.cdp_xaccount_policy: Destroying... [id=arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-xaccount-policy]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[1]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_admin_s3_data_access_policy: Destroying... [id=arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-dladmin-policy]
+module.ex01_minimal_inputs.aws_iam_role_policy_attachment.cdp_datalake_admin_role_attach4: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_s3_bucket.cdp_storage_locations["kuldeep-cdpdemo-buk"]: Destroying... [id=kuldeep-cdpdemo-buk-6ee45e00]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table_association.public[0]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_policy.cdp_log_data_access_policy: Destroying... [id=arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-logs-policy]
+module.ex01_minimal_inputs.aws_iam_policy.cdp_xaccount_policy: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_admin_s3_data_access_policy: Destruction complete after 0s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_internet_gateway.this[0]: Destroying... [id=igw-0d0733c03e675b36a]
+module.ex01_minimal_inputs.time_sleep.iam_propagation: Destroying... [id=2023-10-07T14:01:56Z]
+module.ex01_minimal_inputs.time_sleep.iam_propagation: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_policy.cdp_idbroker_policy: Destroying... [id=arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-idbroker-policy]
+module.ex01_minimal_inputs.aws_iam_policy.cdp_log_data_access_policy: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_backup_policy: Destroying... [id=arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-backup-policy]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[2]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_role.cdp_ranger_audit_role: Destroying... [id=kuldeep-cdpdemo-audit-role]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[1]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_policy.cdp_ranger_audit_s3_data_access_policy: Destroying... [id=arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-audit-policy]
+module.ex01_minimal_inputs.aws_iam_policy.cdp_idbroker_policy: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_policy.cdp_bucket_data_access_policy: Destroying... [id=arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-storage-policy]
+module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_backup_policy: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role.cdp_log_role: Destroying... [id=kuldeep-cdpdemo-logs-role]
+module.ex01_minimal_inputs.aws_iam_role.cdp_ranger_audit_role: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_restore_policy: Destroying... [id=arn:aws:iam::240356362593:policy/kuldeep-cdpdemo-datalake-restore-policy]
+module.ex01_minimal_inputs.aws_iam_policy.cdp_ranger_audit_s3_data_access_policy: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_policy.cdp_bucket_data_access_policy: Destruction complete after 0s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[0]: Destroying... [id=subnet-04c8d0a133ef3c679]
+module.ex01_minimal_inputs.aws_iam_role.cdp_datalake_admin_role: Destroying... [id=kuldeep-cdpdemo-dladmin-role]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_internet_gateway.this[0]: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_iam_role.cdp_log_role: Destruction complete after 0s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table.public[0]: Destroying... [id=rtb-0e5cbaf963ebc4bb0]
+module.ex01_minimal_inputs.aws_iam_policy.cdp_datalake_restore_policy: Destruction complete after 0s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[3]: Destroying... [id=subnet-0b4c196e5d289c9a0]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[4]: Destroying... [id=subnet-038e122570392ead5]
+module.ex01_minimal_inputs.aws_iam_role.cdp_datalake_admin_role: Destruction complete after 0s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[1]: Destroying... [id=subnet-083899209124c4ff1]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_egress: Destruction complete after 1s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[2]: Destroying... [id=subnet-0d34d8a526da15741]
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_ingress[2]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_role.cdp_xaccount_role: Destroying... [id=kuldeep-cdpdemo-xaccount-role]
+module.ex01_minimal_inputs.aws_iam_role.cdp_xaccount_role: Destruction complete after 1s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[0]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_role.cdp_idbroker_role: Destroying... [id=kuldeep-cdpdemo-idbroker-role]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_route_table.public[0]: Destruction complete after 1s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[3]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_iam_role.cdp_idbroker_role: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_default_sg_egress: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_security_group.cdp_default_sg: Destroying... [id=sg-05a32b448631d665a]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[4]: Destruction complete after 1s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[2]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_security_group_rule.cdp_knox_sg_ingress[1]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_security_group.cdp_knox_sg: Destroying... [id=sg-0f4ca08d4a381fe15]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_subnet.public[1]: Destruction complete after 1s
+module.ex01_minimal_inputs.aws_s3_bucket.cdp_storage_locations["kuldeep-cdpdemo-buk"]: Destruction complete after 1s
+module.ex01_minimal_inputs.random_id.bucket_suffix[0]: Destroying... [id=buReAA]
+module.ex01_minimal_inputs.random_id.bucket_suffix[0]: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_security_group.cdp_default_sg: Destruction complete after 0s
+module.ex01_minimal_inputs.aws_security_group.cdp_knox_sg: Destruction complete after 0s
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_vpc.this[0]: Destroying... [id=vpc-0531cd4956f299457]
+module.ex01_minimal_inputs.module.aws_cdp_vpc[0].module.cdp_vpc.aws_vpc.this[0]: Destruction complete after 1s
+
+Destroy complete! Resources: 65 destroyed.
+[root@ip-172-31-42-156 ex01-minimal_inputs]#
